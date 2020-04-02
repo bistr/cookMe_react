@@ -1,4 +1,5 @@
 import React from 'react'
+import { sha256 } from 'js-sha256';
 
 class RegisterForm extends React.Component
 {
@@ -19,6 +20,7 @@ class RegisterForm extends React.Component
 
     handleChange(event)
     {
+        this.setState({ [event.target.name]:event.target.value}, ()=>console.log(this.state));
     }
 
     handleArrayChange(event)
@@ -27,6 +29,21 @@ class RegisterForm extends React.Component
 
     handleSubmit(event)
     {
+        event.preventDefault()
+        fetch('https://cook-me.herokuapp.com/register', {
+          method: 'POST',// or 'PUT'
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          },
+          body: JSON.stringify({"username":this.state.username, "password":sha256(this.state.password)}),
+        })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
     }
 
     render()
@@ -39,9 +56,9 @@ class RegisterForm extends React.Component
                 </div>
                 <div className="form-group">
                     <label>Password</label>
-                    <input type="password" className="form-control" placeholder="Password" name="newPassword" required onChange={this.handleChange} />
+                    <input type="password" className="form-control" placeholder="Password" name="password" required onChange={this.handleChange} />
                 </div>
-                <button>Submit</button>
+                <button onClick={this.handleSubmit}>Submit</button>
         </form>
         )
     }
