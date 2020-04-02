@@ -27,13 +27,13 @@ class RegisterForm extends React.Component
     {
     }
 
-    handleSubmit(event)
+    handleSubmit(e)
     {
-        event.preventDefault()
+        e.preventDefault()
         fetch('https://cook-me.herokuapp.com/register', {
           method: 'POST',// or 'PUT'
           headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
+            'Content-Type': 'application/json'
           },
           body: JSON.stringify({"username":this.state.username, "password":sha256(this.state.password)}),
         })
@@ -58,7 +58,7 @@ class RegisterForm extends React.Component
                     <label>Password</label>
                     <input type="password" className="form-control" placeholder="Password" name="password" required onChange={this.handleChange} />
                 </div>
-                <button onClick={this.handleSubmit}>Submit</button>
+                <button onClick={(e)=>this.handleSubmit(e)}>Submit</button>
         </form>
         )
     }
