@@ -60,10 +60,10 @@ class PostPage extends React.Component
         console.log(author)
         return (
 
-            <div className = "container-fluid">
+            <>
                 <div className="row mx-5">
                     <ImageDisplay src={post.photo} className="col-lg-9"/>
-                    <AuthorInfo author={author} className="col-lg-3"/>
+                    <AuthorInfo author={author} className="col-lg-3" description="Author of post"/>
                 </div>
                 <div className="row mx-5 my-3 d-flex">
                     <blockquote class="blockquote mx-3">
@@ -78,7 +78,7 @@ class PostPage extends React.Component
                     <BackToRecipeButton text="Original recipe" id={post.recipe_id} />
                 </div>
 
-            </div>
+            </>
         )
     }
 };

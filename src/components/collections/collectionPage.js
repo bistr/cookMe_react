@@ -1,29 +1,26 @@
 
 import React, {Component} from 'react';
-import RecipeColumns from './components/recipes/recipeColumns';
-import "./index.css"
-import "./App.css"
+import RecipeColumns from '../recipes/recipeColumns';
 
 
-
-class App extends Component {
-    state = {
-        recipes: []
-      }
+class CollectionPage extends Component {
 
       constructor(props)
       {
-          super(props)
+          super(props);
+          this.state = {recipes: []};
           this.makeItShow=this.makeItShow.bind(this)
+          this.fetchRecipes = this.fetchRecipes.bind(this);
+          let collectionID = this.props.match.params.id;
+          this.fetchRecipes(collectionID);
       }
 
-    componentDidMount() {
-        let fakeURL = 'https://5e7ce6e0a917d700166840b4.mockapi.io/allRecipes'
-        let realURL = 'https://cook-me.herokuapp.com/recipes'
+      fetchRecipes(id) {
+        let realURL = 'https://cook-me.herokuapp.com/collections/'+id;
         fetch(realURL)
         .then(res => res.json())
         .then((data) => {
-          this.setState({ recipes: data })
+          this.setState({ recipes: data["recipes"] })
         })
         .catch(console.log)
     }
@@ -34,7 +31,7 @@ class App extends Component {
   }
 
   render() {
-    if (this.state.recipes === [])
+    if (this.state.recipes == [])
     {
       return null;
     }
@@ -76,4 +73,4 @@ class App extends Component {
 
 
 
-export default App;
+export default CollectionPage;

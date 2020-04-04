@@ -1,5 +1,5 @@
 import React from 'react'
-import "../../componentsStyle/recipeCard.css"
+import "../../componentsStyle/cardStyle.css"
 
 class RecipeCard extends React.Component
 {
@@ -15,10 +15,10 @@ class RecipeCard extends React.Component
     render()
     {
         const {recipe} = this.props;
+        let classString = `card-img-top ${this.props.className}`
         return (
           <div className="card" tag="a" onClick={(e) => this.handleClick(recipe.id, e)}>
-
-            <img className="card-img-top" src={recipe.photo} alt={recipe.name}></img>
+            <img className={classString} src={recipe.photo} alt={recipe.name}></img>
             <div class="card-body">
                 <p className="card-text">{recipe.name}</p>
             </div>

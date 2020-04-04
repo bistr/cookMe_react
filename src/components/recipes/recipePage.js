@@ -5,7 +5,7 @@ import StepsDisplay from "../stepsDisplay"
 import ImageDisplay from "../imageDisplay"
 import NutritionalInfo from "../nutritionalInfo"
 import Modal from '../modal';
-import PostList from "../posts/postList"
+import CardList from "../cardList"
 
 class RecipePage extends React.Component
 {
@@ -18,7 +18,12 @@ class RecipePage extends React.Component
         }
         this.toggleModal = this.toggleModal.bind(this);
         this.fetchRecipe = this.fetchRecipe.bind(this);
+        this.fetchPosts = this.fetchPosts.bind(this);
+        this.fetchCollections = this.fetchCollections.bind(this);
         this.fetchRecipe(this.props.match.params.id);
+        this.fetchPosts(this.props.match.params.id);
+        this.fetchCollections(this.props.match.params.id)
+
         console.log(this.props.match.params.id);
 
     }
@@ -32,6 +37,30 @@ class RecipePage extends React.Component
         .then((data) => {
           this.setState({ recipe: data })
         })
+        .catch(console.log)
+    }
+
+    fetchPosts(id)
+    {
+        let realURL = 'https://cook-me.herokuapp.com/recipes/'+id+"/posts";
+        fetch(realURL)
+        .then(res => res.json())
+        .then((data) => {
+          this.setState({ posts: data })
+        })
+        .catch(console.log)
+    }
+
+    fetchCollections(id)
+    {
+        //let fakeURL = 'https://5e7ce6e0a917d700166840b4.mockapi.io/postsByRecipe/'+recipeId
+        let userID = 1;
+        let realURL = "https://cook-me.herokuapp.com/users/"+userID+"/collections_without/"+id;
+        fetch(realURL)
+        .then(res => res.json())
+        .then((data) => {
+          this.setState({ collections: data }, ()=>console.log(this.state))
+      })
         .catch(console.log)
     }
 
@@ -57,9 +86,9 @@ class RecipePage extends React.Component
         const {recipe} = this.state;
         return (
 
-            <div className = "container-fluid">
+            <>
             <Modal show={this.state.postModal} type="postModal" id={recipe.id} handler={this.toggleModal}/>
-            <Modal show={this.state.addModal} type="addModal" id={recipe.id} handler={this.toggleModal}/>
+            <Modal show={this.state.addModal} collections={this.state.collections} type="addModal" id={recipe.id} handler={this.toggleModal}/>
                 <div className="row mx-3">
                     <ImageDisplay src={recipe.photo} className="col-lg-8"/>
                     <NutritionalInfo ingredients={recipe.ingredients} className="col-lg-4"/>
@@ -80,10 +109,10 @@ class RecipePage extends React.Component
                 </div>
                 <div className="row mx-3 my-5">
                     <p> Posts about {recipe.name} </p>
-                    <PostList recipe={recipe.id}/>
+                    <CardList type="posts" items={this.state.posts}/>
                 </div>
 
-            </div>
+            </>
         )
     }
 };

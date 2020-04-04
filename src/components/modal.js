@@ -1,7 +1,7 @@
 import React from "react";
 import "../componentsStyle/modal.css"
 import PostForm from "./posts/postForm"
-import AddForm from "./addForm"
+import AddForm from "./collections/addForm"
 import CloseButton from "./closeButton"
 
 class Modal extends React.Component {
@@ -21,7 +21,7 @@ class Modal extends React.Component {
     }
     else if(this.props.type === "addModal")
     {
-        modal=<AddForm id={this.props.id}/>;
+        modal=<AddForm recipe_id={this.props.id} close={this.props.handler} collections={this.props.collections}/>;
     }
 
     return (

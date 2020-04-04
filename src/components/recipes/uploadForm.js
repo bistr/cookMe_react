@@ -65,7 +65,7 @@ class UploadForm extends React.Component
     {
 
         return(
-            <div className="container-fluid d-flex flex-column text-center m-2">
+            <div className="d-flex flex-column text-center m-2">
             <p className="h4 my-5">Tell us about your recipe!</p>
             <div className="row mx-3">
                 <SingleInput className="col-lg" name="name" handler={this.handleComponentChange}/>

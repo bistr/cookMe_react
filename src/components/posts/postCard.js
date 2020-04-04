@@ -1,5 +1,5 @@
 import React from 'react'
-import "../../componentsStyle/postCard.css"
+import "../../componentsStyle/cardStyle.css"
 class PostCard extends React.Component
 {
     constructor(props)
