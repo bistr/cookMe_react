@@ -26,7 +26,6 @@ class PostPage extends React.Component
 
     fetchPost(id)
     {
-        let fakeURL = 'https://5e7ce6e0a917d700166840b4.mockapi.io/postsByID/'+id
         let realURL = 'https://cook-me.herokuapp.com/posts/'+id
         fetch(realURL)
         .then(res => res.json())

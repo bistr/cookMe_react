@@ -1,5 +1,6 @@
 import React from 'react'
 import EquipmentCard from "./equipmentCard"
+import UserProfile from "./userProfile"
 
 class EquipmentForm extends React.Component
 {
@@ -9,7 +10,8 @@ class EquipmentForm extends React.Component
 
         this.state =
         {
-            tools:{"grater":0, "grill":0, "microwave":0,"mixer":0,"pan":0,"pot":0,"stove":0,"toaster":0}
+            tools:{"grater":0, "grill":0, "microwave":0,"mixer":0,"pan":0,"pot":0,"stove":0,"toaster":0},
+            user_id:UserProfile.getName()
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -17,7 +19,7 @@ class EquipmentForm extends React.Component
         this.fetchEquipment = this.fetchEquipment.bind(this);
         this.colorOwnedEquipment = this.colorOwnedEquipment.bind(this)
 
-        this.fetchEquipment(1);
+        this.fetchEquipment(this.state.user_id);
     }
 
     fetchEquipment(id)
@@ -26,7 +28,12 @@ class EquipmentForm extends React.Component
         fetch(realURL)
         .then(res => res.json())
         .then((data) => {
-          this.setState({ tools: data}, ()=>console.log(this.state))
+            if (Object.keys(data)!=0)
+            {
+                console.log(data.length);
+                this.setState({ tools: data}, ()=>console.log(this.state))
+            }
+
         })
         .then(()=>{this.colorOwnedEquipment()})
         .catch(console.log)
@@ -56,7 +63,7 @@ class EquipmentForm extends React.Component
     {
         event.preventDefault();
         //TODO FIXME
-        fetch('https://cook-me.herokuapp.com/update-equipment/1', {
+        fetch('https://cook-me.herokuapp.com/update-equipment/'+this.state.user_id, {
           method: 'POST',// or 'PUT'
           headers: {
             'Content-Type': 'application/json',
@@ -64,7 +71,7 @@ class EquipmentForm extends React.Component
           body: JSON.stringify(this.state),
         })
         .then((response) => response.json())
-        .then(()=>{const win = window.open("/profile/1");})
+        .then(()=>{const win = window.open("/profile/"+this.state.user_id);})
         //go to profile page or something
         // .then((data) => {
         //   this.openRecipePage(data.id);

@@ -3,6 +3,7 @@ import SingleInput from "../genericInputs/singleInput"
 import DynamicInputs from "../genericInputs/dynamicInputs"
 import DietaryPreferencesInput from "../dietaryPreferencesInput"
 import EquipmentIcons from "../equipmentIcons"
+import UserProfile from "../userProfile"
 
 class UploadForm extends React.Component
 {
@@ -14,7 +15,8 @@ class UploadForm extends React.Component
         {
             ingredients:[],
             steps:[],
-            equipment:{"grater":0, "grill":0, "microwave":0,"mixer":0,"pan":0,"pot":0,"stove":0,"toaster":0}
+            equipment:{"grater":0, "grill":0, "microwave":0,"mixer":0,"pan":0,"pot":0,"stove":0,"toaster":0},
+            user_id:UserProfile.getName()
         };
 
         this.handleChange = this.handleChange.bind(this);

@@ -1,11 +1,13 @@
 import React from 'react'
 import CardList from "./cardList"
 import AuthorInfo from "./authorInfo"
+import UserProfile from "./userProfile"
 class ProfilePage extends React.Component
 {
     constructor(props)
     {
         super(props);
+        this.state = {user_id:UserProfile.getName()};
         this.fetchRecipes = this.fetchRecipes.bind(this);
         this.fetchPosts = this.fetchPosts.bind(this);
         this.fetchCollections = this.fetchCollections.bind(this);
@@ -78,6 +80,9 @@ class ProfilePage extends React.Component
                         <AuthorInfo author={this.state.user} description="" />
                     </div>
                     <div class="row">
+                    {
+                        if (userId == )
+                    }
                     <button class="btn btn-primary" onClick={this.handleClick}>Update Equipment</button>
                     </div>
 

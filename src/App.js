@@ -46,15 +46,15 @@ class App extends Component {
         <div class="dropdown-menu">
         <div class="custom-control custom-checkbox dropdown-item mx-1">
           <input type="checkbox" class="custom-control-input" id="customCheck1"/>
-          <label class="custom-control-label" for="customCheck1">Vegan</label>
+          <label class="custom-control-label" htmlFor="customCheck1">Vegan</label>
         </div>
         <div class="custom-control custom-checkbox dropdown-item mx-1">
           <input type="checkbox" class="custom-control-input" id="customCheck2"/>
-          <label class="custom-control-label" for="customCheck2">Vegetarian</label>
+          <label class="custom-control-label" htmlFor="customCheck2">Vegetarian</label>
         </div>
         <div class="custom-control custom-checkbox dropdown-item mx-1">
           <input type="checkbox" class="custom-control-input" id="customCheck3"/>
-          <label class="custom-control-label" for="customCheck3">Gluten-free</label>
+          <label class="custom-control-label" htmlFor="customCheck3">Gluten-free</label>
         </div>
     <div class="dropdown-divider"></div>
       <div class="custom-control custom-checkbox dropdown-item">

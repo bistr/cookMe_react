@@ -1,4 +1,5 @@
 import React from 'react'
+import UserProfile from '../userProfile';
 import "../../index.css"
 import IngredientsDisplay from "../ingredients/ingredientsDisplay"
 import StepsDisplay from "../stepsDisplay"
@@ -14,8 +15,10 @@ class RecipePage extends React.Component
         super(props);
         this.state = {
             addModal:false,
-            postModal:false
+            postModal:false,
+            user_id:UserProfile.getName()
         }
+        console.log(this.state.user_id)
         this.toggleModal = this.toggleModal.bind(this);
         this.fetchRecipe = this.fetchRecipe.bind(this);
         this.fetchPosts = this.fetchPosts.bind(this);
@@ -30,7 +33,6 @@ class RecipePage extends React.Component
 
     fetchRecipe(id)
     {
-        let fakeURL ='https://5e7ce6e0a917d700166840b4.mockapi.io/allRecipes/'+id;
         let realURL = 'https://cook-me.herokuapp.com/recipes/'+id;
         fetch(realURL)
         .then(res => res.json())
@@ -54,8 +56,7 @@ class RecipePage extends React.Component
     fetchCollections(id)
     {
         //let fakeURL = 'https://5e7ce6e0a917d700166840b4.mockapi.io/postsByRecipe/'+recipeId
-        let userID = 1;
-        let realURL = "https://cook-me.herokuapp.com/users/"+userID+"/collections_without/"+id;
+        let realURL = "https://cook-me.herokuapp.com/users/"+this.state.user_id+"/collections_without/"+id;
         fetch(realURL)
         .then(res => res.json())
         .then((data) => {

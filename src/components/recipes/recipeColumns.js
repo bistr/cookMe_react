@@ -10,7 +10,7 @@ class RecipeColumns extends React.Component
         return (
           <div className="card-columns">
             {recipes.map((recipe) => (
-                <RecipeCard recipe={recipe}/>
+                <RecipeCard key={recipe.id} recipe={recipe}/>
             ))}
           </div>
         )

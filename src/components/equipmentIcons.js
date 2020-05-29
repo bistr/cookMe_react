@@ -1,5 +1,6 @@
 import React from 'react'
 import EquipmentCard from "./equipmentCard"
+import UserProfile from "./userProfile"
 
 class EquipmentIcons extends React.Component
 {
@@ -9,13 +10,14 @@ class EquipmentIcons extends React.Component
         this.handleCardClick = this.handleCardClick.bind(this);
         this.state =
         {
-            tools:{"grater":0, "grill":0, "microwave":0,"mixer":0,"pan":0,"pot":0,"stove":0,"toaster":0}
+            tools:{"grater":0, "grill":0, "microwave":0,"mixer":0,"pan":0,"pot":0,"stove":0,"toaster":0},
+            user_id:UserProfile.getName()
         };
         this.fetchEquipment = this.fetchEquipment.bind(this);
         this.colorOwnedEquipment = this.colorOwnedEquipment.bind(this)
         if(this.props.preloaded === "true")
         {
-            this.fetchEquipment(1);
+            this.fetchEquipment(this.state.user_id);
         }
 
 
@@ -23,7 +25,7 @@ class EquipmentIcons extends React.Component
 
     fetchEquipment(id)
     {
-        let realURL = 'https://cook-me.herokuapp.com/get-user-equipment/'+id;
+        let realURL = 'https://cook-me.herokuapp.com/get-user-equipment/'+this.state.user_id;
         fetch(realURL)
         .then(res => res.json())
         .then((data) => {

@@ -1,5 +1,6 @@
 import React from 'react'
 import SingleInput from "../genericInputs/singleInput"
+import UserProfile from "../userProfile"
 import "../../index.css"
 
 
@@ -8,7 +9,7 @@ class PostForm extends React.Component
     constructor(props)
     {
         super(props);
-        this.state = {recipe_id:this.props.id, user_id:1}
+        this.state = {recipe_id:this.props.id, user_id:UserProfile.getName()}
         this.handleChange = this.handleChange.bind(this);
         this.handleComponentChange = this.handleComponentChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);

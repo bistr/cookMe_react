@@ -1,5 +1,6 @@
 import React from 'react'
-import EquipmentCard from "./equipmentCard"
+import UserProfile from './userProfile';
+import { sha256 } from 'js-sha256';
 
 class LoginForm extends React.Component
 {
@@ -9,94 +10,57 @@ class LoginForm extends React.Component
 
         this.state =
         {
-            tools:{"grater":0, "grill":0, "microwave":0,"mixer":0,"pan":0,"pot":0,"stove":0,"toaster":0}
+            success: '',
+            message: ''
         };
 
-        this.handleChange = this.handleChange.bind(this);
-        this.handleArrayChange = this.handleArrayChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleClick = this.handleClick.bind(this);
-        this.fetchEquipment = this.fetchEquipment.bind(this);
-        this.colorOwnedEquipment = this.colorOwnedEquipment.bind(this)
-
-        this.fetchEquipment(1);
-    }
-
-    fetchEquipment(id)
-    {
-        let realURL = 'https://cook-me.herokuapp.com/get-user-equipment/'+id;
-        fetch(realURL)
-        .then(res => res.json())
-        .then((data) => {
-          this.setState({ tools: data}, ()=>console.log(this.state))
-        })
-        .then(()=>{this.colorOwnedEquipment()})
-        .catch(console.log)
-    }
-
-    colorOwnedEquipment()
-    {
-        const tools = ["grater", "grill", "microwave","mixer","pan","pot","stove","toaster"];
-        tools.map((tool)=>{
-            if (this.state.tools[tool] == 1)
-            {
-                document.getElementById(tool).classList.toggle("pressed");
-            }
-        });
-    }
-
-    handleClick(tool, event)
-    {
-        let newTools = this.state.tools;
-        newTools[tool] = !newTools[tool];
-        this.setState({"tools":newTools},()=>console.log(this.state));
-        document.getElementById(tool).classList.toggle("pressed");
-    }
-
-    handleArrayChange(event)
-    {
     }
 
     handleSubmit(event)
     {
-        event.preventDefault();
-        //TODO FIXME
-        fetch('https://cook-me.herokuapp.com/update-equipment/1', {
-          method: 'POST',// or 'PUT'
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(this.state),
-        })
-        .then((response) => response.json())
-        //go to profile page or something
-        // .then((data) => {
-        //   this.openRecipePage(data.id);
-        // })
-        .catch((error) => {
-          console.error('Error:', error);
-        });
+        let userId = document.getElementById("userid").value;
+        UserProfile.setName(userId);
     }
+
+
+
+    // handleSubmit(e)
+    // {
+    //     e.preventDefault()
+    //     fetch('https://cook-me.herokuapp.com/login', {
+    //       method: 'POST',// or 'PUT'
+    //       headers: {
+    //         'Content-Type': 'application/json'
+    //       },
+    //       body: JSON.stringify({"username":this.state.username, "password":sha256(this.state.password)}),
+    //     })
+    //     .then((response) => response.json())
+    //     .then((data) => {
+    //       console.log(data);
+    //     })
+    //     .catch((error) => {
+    //       console.error('Error:', error);
+    //     });
+    // }
+    // <div className="form-group">
+    //     <label>Username</label>
+    //     <input type="text" className="form-control" placeholder="Username" name="username" required onChange={this.handleChange} />
+    // </div>
+    // <div className="form-group">
+    //     <label>Password</label>
+    //     <input type="password" className="form-control" placeholder="Password" name="password" required onChange={this.handleChange} />
+    // </div>
 
     render()
     {
-        const tools = ["grater", "grill", "microwave","mixer","pan","pot","stove","toaster"];
         return(
-            <>
-            <div class="row my justify-content-center">
-                <p className="display-4 my-3">What kinds of kitchenware do you own?</p>
-            </div>
-            <div class="row my-3 justify-content-center">
-                <div className="card-deck mx-5 ">
-                  {tools.map((tool) => (
-                      <EquipmentCard name={tool} handler={this.handleClick}/>
-                  ))}
-                </div>
-            </div>
-            <div class="row justify-content-center">
-                <button className="btn btn-primary m-4" onClick={this.handleSubmit} >Update kitchenware</button>
-            </div>
-        </>
+            <form onSubmit={this.handleSubmit} className="w-75">
+
+                <label>Which user are you?</label>
+                <input type="number" className="form-control" placeholder="user id" id="userid" />
+                <button onClick={(e)=>this.handleSubmit(e)}>Submit</button>
+        </form>
         )
     }
  }
