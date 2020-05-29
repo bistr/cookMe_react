@@ -2,6 +2,7 @@ import React from 'react'
 import SingleInput from "../genericInputs/singleInput"
 import DynamicInputs from "../genericInputs/dynamicInputs"
 import DietaryPreferencesInput from "../dietaryPreferencesInput"
+import EquipmentIcons from "../equipmentIcons"
 
 class UploadForm extends React.Component
 {
@@ -12,7 +13,8 @@ class UploadForm extends React.Component
         this.state =
         {
             ingredients:[],
-            steps:[]
+            steps:[],
+            equipment:{"grater":0, "grill":0, "microwave":0,"mixer":0,"pan":0,"pot":0,"stove":0,"toaster":0}
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -30,6 +32,7 @@ class UploadForm extends React.Component
     {
         this.setState({ [nameOfField]:valueOfField},()=>console.log(this.state));
     }
+
 
     handleChange(event)
     {
@@ -169,6 +172,7 @@ class UploadForm extends React.Component
             </div>
             <hr />
             <DynamicInputs name="steps" handler={this.handleComponentChange}/>
+            <EquipmentIcons name="equipment" handler={this.handleComponentChange} preloaded="false" />
             <button className="btn btn-info btn-block my-5" onClick={this.handleSubmit}>Submit</button>
 
             </div>

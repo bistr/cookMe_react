@@ -1,25 +1,24 @@
 import React from 'react'
 import EquipmentCard from "./equipmentCard"
 
-class LoginForm extends React.Component
+class EquipmentIcons extends React.Component
 {
     constructor(props)
     {
         super(props);
-
+        this.handleCardClick = this.handleCardClick.bind(this);
         this.state =
         {
             tools:{"grater":0, "grill":0, "microwave":0,"mixer":0,"pan":0,"pot":0,"stove":0,"toaster":0}
         };
-
-        this.handleChange = this.handleChange.bind(this);
-        this.handleArrayChange = this.handleArrayChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleClick = this.handleClick.bind(this);
         this.fetchEquipment = this.fetchEquipment.bind(this);
         this.colorOwnedEquipment = this.colorOwnedEquipment.bind(this)
+        if(this.props.preloaded === "true")
+        {
+            this.fetchEquipment(1);
+        }
 
-        this.fetchEquipment(1);
+
     }
 
     fetchEquipment(id)
@@ -45,38 +44,15 @@ class LoginForm extends React.Component
         });
     }
 
-    handleClick(tool, event)
+    handleCardClick(tool)
     {
         let newTools = this.state.tools;
         newTools[tool] = !newTools[tool];
         this.setState({"tools":newTools},()=>console.log(this.state));
         document.getElementById(tool).classList.toggle("pressed");
+        this.props.handler(this.props.name,this.state.tools);
     }
 
-    handleArrayChange(event)
-    {
-    }
-
-    handleSubmit(event)
-    {
-        event.preventDefault();
-        //TODO FIXME
-        fetch('https://cook-me.herokuapp.com/update-equipment/1', {
-          method: 'POST',// or 'PUT'
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(this.state),
-        })
-        .then((response) => response.json())
-        //go to profile page or something
-        // .then((data) => {
-        //   this.openRecipePage(data.id);
-        // })
-        .catch((error) => {
-          console.error('Error:', error);
-        });
-    }
 
     render()
     {
@@ -89,16 +65,13 @@ class LoginForm extends React.Component
             <div class="row my-3 justify-content-center">
                 <div className="card-deck mx-5 ">
                   {tools.map((tool) => (
-                      <EquipmentCard name={tool} handler={this.handleClick}/>
+                      <EquipmentCard name={tool} handler={this.handleCardClick}/>
                   ))}
                 </div>
-            </div>
-            <div class="row justify-content-center">
-                <button className="btn btn-primary m-4" onClick={this.handleSubmit} >Update kitchenware</button>
             </div>
         </>
         )
     }
  }
 
-export default LoginForm;
+export default EquipmentIcons;

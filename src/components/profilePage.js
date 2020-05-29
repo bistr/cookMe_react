@@ -63,12 +63,24 @@ class ProfilePage extends React.Component
         .catch(console.log)
     }
 
+    handleClick()
+    {
+        const win = window.open("/equipment/");
+    }
+
     render()
     {
         return(
+
             <div class="row">
                 <div class="col-lg-3 h-100 bg-black">
-                    <AuthorInfo author={this.state.user} description="" />
+                    <div class="row">
+                        <AuthorInfo author={this.state.user} description="" />
+                    </div>
+                    <div class="row">
+                    <button class="btn btn-primary" onClick={this.handleClick}>Update Equipment</button>
+                    </div>
+
                 </div>
                 <div class="col-lg-9 h-100 d-flex flex-column">
                     <div className="row mx-3 my-3 ">

@@ -1,7 +1,7 @@
 import React from 'react'
 import EquipmentCard from "./equipmentCard"
 
-class LoginForm extends React.Component
+class EquipmentForm extends React.Component
 {
     constructor(props)
     {
@@ -12,8 +12,6 @@ class LoginForm extends React.Component
             tools:{"grater":0, "grill":0, "microwave":0,"mixer":0,"pan":0,"pot":0,"stove":0,"toaster":0}
         };
 
-        this.handleChange = this.handleChange.bind(this);
-        this.handleArrayChange = this.handleArrayChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleClick = this.handleClick.bind(this);
         this.fetchEquipment = this.fetchEquipment.bind(this);
@@ -53,9 +51,6 @@ class LoginForm extends React.Component
         document.getElementById(tool).classList.toggle("pressed");
     }
 
-    handleArrayChange(event)
-    {
-    }
 
     handleSubmit(event)
     {
@@ -69,6 +64,7 @@ class LoginForm extends React.Component
           body: JSON.stringify(this.state),
         })
         .then((response) => response.json())
+        .then(()=>{const win = window.open("/profile/1");})
         //go to profile page or something
         // .then((data) => {
         //   this.openRecipePage(data.id);
@@ -101,4 +97,4 @@ class LoginForm extends React.Component
     }
  }
 
-export default LoginForm;
+export default EquipmentForm;

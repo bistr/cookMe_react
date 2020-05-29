@@ -13,6 +13,7 @@ import PostForm from "./components/posts/postForm"
 import ProfilePage from "./components/profilePage"
 import Navigation from "./components/navigation"
 import CollectionPage from "./components/collections/collectionPage"
+import EquipmentForm from "./components/equipmentForm"
 import * as serviceWorker from './serviceWorker';
 
 const routing = (
@@ -30,6 +31,7 @@ const routing = (
         <Route path = "/publishPost/:id" component = {PostForm} />
         <Route path = "/profile/:id" component = {ProfilePage} />
         <Route path = "/collections/:id" component = {CollectionPage} />
+        <Route path = "/equipment/" component = {EquipmentForm} />
       </Switch>
       </div>
 
