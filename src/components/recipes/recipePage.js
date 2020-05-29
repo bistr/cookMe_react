@@ -91,7 +91,7 @@ class RecipePage extends React.Component
             <Modal show={this.state.addModal} collections={this.state.collections} type="addModal" id={recipe.id} handler={this.toggleModal}/>
                 <div className="row mx-3">
                     <ImageDisplay src={recipe.photo} className="col-lg-8"/>
-                    <NutritionalInfo ingredients={recipe.ingredients} className="col-lg-4"/>
+                    <NutritionalInfo info={recipe.nutrientInfo} className="col-lg-4"/>
                 </div>
                 <div className="row m-4 justify-content-between">
                     <h1>{recipe.name}</h1>

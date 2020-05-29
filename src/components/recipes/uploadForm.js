@@ -19,6 +19,10 @@ class UploadForm extends React.Component
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleComponentChange = this.handleComponentChange.bind(this);
         this.openRecipePage = this.openRecipePage.bind(this);
+        this.convertIngredientToString = this.convertIngredientToString.bind(this);
+        this.extractIngredients = this.extractIngredients.bind(this)
+        this.extractNutritionalInfo = this.extractNutritionalInfo.bind(this)
+        this.collectInfo = this.collectInfo.bind(this)
 
     }
 
@@ -41,24 +45,111 @@ class UploadForm extends React.Component
         }
     }
 
-
-    handleSubmit(e)
+    convertIngredientToString(ingredient)
     {
-        e.preventDefault()
-        fetch('https://cook-me.herokuapp.com/upload', {
-          method: 'POST',// or 'PUT'
+        const {amount, name, unit} = ingredient;
+        return `${amount} ${unit} ${name}, `;
+    }
+
+    extractIngredients()
+    {
+        let result = "";
+        this.state.ingredients.forEach((ingredient) => {
+            result=result.concat(this.convertIngredientToString(ingredient))
+        });
+
+        console.log(result)
+        return result;
+    }
+
+    extractNutritionalInfo(data)
+    {
+        const {foods} = data;
+        let calories = 0;
+        let fat = 0;
+        let sodium = 0;
+        let sugar = 0;
+        let protein = 0;
+        //that might use a "reduce"
+        foods.forEach((food) => {
+            calories+=food.nf_calories;
+            fat+=food.nf_total_fat;
+            sodium+=food.nf_sodium/1000;
+            sugar+=food.nf_sugars;
+            protein+=food.nf_protein;
+        });
+        this.setState({"nutrientInfo":[
+            {"name":"Calories", "value":calories},
+            {"name":"Fat", "value":fat.toPrecision(2)},
+            {"name":"Sugar", "value":sugar},
+            {"name":"Salt", "value":sodium},
+            {"name":"Protein", "value":protein}
+        ]});
+
+
+    }
+
+    async collectInfo()
+    {
+        const ingredientList = this.extractIngredients();
+        const data = { query: ingredientList };
+
+        let promise = await fetch('https://trackapi.nutritionix.com/v2/natural/nutrients', {
+          method: 'POST', // or 'PUT'
           headers: {
             'Content-Type': 'application/json',
+            'x-app-id':' d0d94ea0',
+            'x-app-key':'c5e02317496f34f27f0ab52d6b132ebb',
+            'x-remote-user-id':'0'
           },
-          body: JSON.stringify(this.state),
+          body: JSON.stringify(data),
         })
         .then((response) => response.json())
         .then((data) => {
-          this.openRecipePage(data.id);
+          this.extractNutritionalInfo(data);
         })
         .catch((error) => {
           console.error('Error:', error);
+          //no!
+          this.setState({"nutrientInfo":[
+              {"name":"Calories", "value":100},
+              {"name":"Fat", "value":25},
+              {"name":"Sugar", "value":0.8},
+              {"name":"Salt", "value":12},
+              {"name":"Protein", "value":6}
+          ]});
         });
+        return promise;
+    }
+
+
+
+
+
+
+    handleSubmit(e)
+    {
+        e.preventDefault();
+        this.collectInfo()
+        .then(()=>{
+                fetch('https://cook-me.herokuapp.com/upload', {
+                  method: 'POST',// or 'PUT'
+                  headers: {
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify(this.state),
+                })
+                .then((response) => response.json())
+                .then((data) => {
+                  this.openRecipePage(data.id);
+                })
+                .catch((error) => {
+                  console.error('Error:', error);
+                });
+            }
+        )
+;
+
     }
 
     render()
