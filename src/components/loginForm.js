@@ -16,6 +16,33 @@ class LoginForm extends React.Component
         this.handleArrayChange = this.handleArrayChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleClick = this.handleClick.bind(this);
+        this.fetchEquipment = this.fetchEquipment.bind(this);
+        this.colorOwnedEquipment = this.colorOwnedEquipment.bind(this);
+
+        this.fetchEquipment(1);
+    }
+
+    fetchEquipment(id)
+    {
+        let realURL = 'https://cook-me.herokuapp.com/get-user-equipment/'+id;
+        fetch(realURL)
+        .then(res => res.json())
+        .then((data) => {
+          this.setState({ tools: data}, ()=>console.log(this.state))
+        })
+        .then(()=>{this.colorOwnedEquipment()})
+        .catch(console.log)
+    }
+
+    colorOwnedEquipment()
+    {
+        const tools = ["grater", "grill", "microwave","mixer","pan","pot","stove","toaster"];
+        tools.map((tool)=>{
+            if (this.state.tools[tool] == 1)
+            {
+                document.getElementById(tool).classList.toggle("pressed");
+            }
+        });
     }
 
     handleChange(event)
