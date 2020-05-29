@@ -21,7 +21,7 @@ class PostCard extends React.Component
     {
         const {post} = this.props;
         return(
-        <div class="card post-card" tag="a" onClick={(e)=>this.handleClick(post.id, e)}>
+        <div class="card" tag="a" onClick={(e)=>this.handleClick(post.id, e)}>
           <img class="card-img post-card-img" src={post.photo} alt={post.title}/>
           <div class="card-img-overlay d-flex justify-content-center align-items-center">
             <h2 className="card-text text-white">{post.title}</h2>

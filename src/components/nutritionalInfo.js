@@ -112,6 +112,7 @@ class NutritionalInfo extends React.Component
 
 
         return (
+            
             <div className={classNameString}>
             <table className="w-100">
             <thead className="thead-dark w-100">
