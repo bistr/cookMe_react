@@ -4,7 +4,7 @@ import DynamicInputs from "../genericInputs/dynamicInputs"
 import DietaryPreferencesInput from "../dietaryPreferencesInput"
 import EquipmentIcons from "../equipment/equipmentIcons"
 import UserProfile from "../userProfile"
-import RatingIcons from "../ratingIcons"
+import RatingIcons from "./ratingIcons"
 
 class UploadForm extends React.Component
 {
@@ -175,18 +175,17 @@ class UploadForm extends React.Component
             </div>
             <hr />
             <DynamicInputs name="steps" handler={this.handleComponentChange}/>
-
-            <EquipmentIcons name="equipment" handler={this.handleComponentChange} preloaded="false" />
             <div className="row mt-3 justify-content-center align-items-center">
-                <h4 class="text-capitalize text-dark mx-4 rating-text">Difficulty</h4>
+                <EquipmentIcons name="equipment" handler={this.handleComponentChange} preloaded="false" />
+            </div>
+
+            <div className="row mt-3 justify-content-center align-items-center">
                 <RatingIcons name="difficulty" handler={this.handleComponentChange}/>
             </div>
             <div className="row mt-3 justify-content-center align-items-center">
-                <h4 class="text-capitalize text-dark mx-4 w-60 rating-text">Time</h4>
                 <RatingIcons name="time" handler={this.handleComponentChange}/>
             </div>
             <div className="row mt-3 justify-content-center align-items-center">
-                <h4 class="text-capitalize text-dark mx-4 w-60 rating-text">Price</h4>
                 <RatingIcons name="price" handler={this.handleComponentChange}/>
             </div>
 

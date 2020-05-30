@@ -1,6 +1,6 @@
 import React from 'react'
-import UserProfile from "./userProfile"
-import "../componentsStyle/cardStyle.css"
+import UserProfile from "../userProfile"
+import "../../componentsStyle/cardStyle.css"
 
 class RatingIcons extends React.Component
 {
@@ -61,6 +61,17 @@ class RatingIcons extends React.Component
 
     // }
 
+    displayInfo()
+    {
+        let secondURL= `${process.env.PUBLIC_URL}/images/${this.props.name}Color.png`;
+        let i = 1;
+        for (i=1; i<=this.props.info; i++)
+        {
+            // document.getElementById(this.props.name+i).classList.add("pressed")
+            document.getElementById(this.props.name+i).setAttribute("src",secondURL)
+        }
+    }
+
     hoverHandler(event)
     {
         let currentID = event.target.id;
@@ -105,6 +116,21 @@ class RatingIcons extends React.Component
 
     render()
     {
+        let nums=[1,2,3];
+        if ("info" in this.props)
+        {
+            let imgSource = `${process.env.PUBLIC_URL}/images/${this.props.name}.png`;
+            let secondImgSource = `${process.env.PUBLIC_URL}/images/${this.props.name}Color.png`;
+            return(
+                <>
+                <label class="text-capitalize text-dark mx-4 w-60 rating-text">{this.props.name}</label>
+                <img className="rating-icon" src={(this.props.info<1)?imgSource:secondImgSource} id={this.props.name+"1"}/>
+                <img className="rating-icon" src={(this.props.info<2)?imgSource:secondImgSource} id={this.props.name+"2"}/>
+                <img className="rating-icon" src={(this.props.info<3)?imgSource:secondImgSource} id={this.props.name+"3"}/>
+                </>
+            )
+
+        }
         // const tools = ["grater", "grill", "microwave","mixer","pan","pot","stove","toaster"];
         // return(
         //     <>
@@ -122,8 +148,9 @@ class RatingIcons extends React.Component
 
         return(
             <>
+            <h4 class="text-capitalize text-dark mx-4 w-60 rating-text">{this.props.name}</h4>
             <img className="rating-icon" onMouseOver={this.hoverHandler} onClick={this.clickHandler} onMouseLeave={this.leaveHandler} src={imgSource} id={this.props.name+"1"}/>
-            <img className="rating-icon" onMouseOver={this.hoverHandler} onClick={this.clickHandler} onMouseLeave={this.leaveHandler}src={imgSource} id={this.props.name+"2"}/>
+            <img className="rating-icon" onMouseOver={this.hoverHandler} onClick={this.clickHandler} onMouseLeave={this.leaveHandler} src={imgSource} id={this.props.name+"2"}/>
             <img className="rating-icon" onMouseOver={this.hoverHandler} onClick={this.clickHandler} onMouseLeave={this.leaveHandler} src={imgSource} id={this.props.name+"3"}/>
             </>
         )

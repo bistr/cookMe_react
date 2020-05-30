@@ -5,10 +5,10 @@ class StepsDisplay extends React.Component
 
     render()
     {
-        let classNameString = ` ${ this.props.className }`;
+        let classNameString = `my-4 d-inline ${ this.props.className }`;
         return (
         <div className = {classNameString}>
-        <h4 className="my-3">Steps</h4>
+        <h4 className="mb-4">Steps</h4>
           {this.props.steps.map((step) => (
             <div>
                 <p class="">{step.description}</p>

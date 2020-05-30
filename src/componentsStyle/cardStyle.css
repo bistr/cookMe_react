@@ -31,7 +31,8 @@
 
 .equipment-card
 {
-    max-height: 30vh;
+
+
 }
 
 .equipment-card-deck
@@ -41,22 +42,23 @@
 
 .card-equipment-img
 {
-    max-width: inherit;
+    max-width: 8vw;
 }
 
 .pressed
 {
     box-shadow: 0 0 20px 10px #007bff;
+    border-radius: 10px;
     /* in order: x offset, y offset, blur size, spread size, color */
     /* blur size and spread size are optional (they default to 0) */
 }
 
 .rating-icon
 {
-        max-width: 5%;
+        max-width: 5vw;
 }
 
 .rating-text
 {
-    width: 15%
+    width: 15%;
 }

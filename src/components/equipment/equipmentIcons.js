@@ -21,6 +21,21 @@ class EquipmentIcons extends React.Component
         }
 
 
+
+    }
+
+    componentDidMount()
+    {
+        if("equipment" in this.props)
+        {
+            const tools = ["grater", "grill", "microwave","mixer","pan","pot","stove","toaster"];
+            tools.map((tool)=>{
+                if (this.props.equipment[tool] == 1)
+                {
+                    document.getElementById(tool).classList.toggle("pressed");
+                }
+            });
+        }
     }
 
     fetchEquipment(id)
@@ -48,6 +63,10 @@ class EquipmentIcons extends React.Component
 
     handleCardClick(tool)
     {
+        if("equipment" in this.props)
+        {
+            return;
+        }
         let newTools = this.state.tools;
         newTools[tool] = !newTools[tool];
         this.setState({"tools":newTools},()=>console.log(this.state));
@@ -61,13 +80,9 @@ class EquipmentIcons extends React.Component
         const tools = ["grater", "grill", "microwave","mixer","pan","pot","stove","toaster"];
         return(
             <>
-            <div class="row my-3 justify-content-center">
-                <div className="card-deck mx-5 ">
                   {tools.map((tool) => (
                       <EquipmentCard name={tool} handler={this.handleCardClick}/>
                   ))}
-                </div>
-            </div>
         </>
         )
     }

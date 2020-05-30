@@ -4,9 +4,10 @@ import "../../index.css"
 import IngredientsDisplay from "../ingredients/ingredientsDisplay"
 import StepsDisplay from "../stepsDisplay"
 import ImageDisplay from "../imageDisplay"
-import NutritionalInfo from "../nutritionalInfo"
+import NutritionalInfo from "./nutritionalInfo"
 import Modal from '../modal';
 import CardList from "../cardList"
+import InfoBlock from "./infoBlock"
 
 class RecipePage extends React.Component
 {
@@ -112,8 +113,9 @@ class RecipePage extends React.Component
                 <div className="row mx-3 my-1">
                     <IngredientsDisplay ingredients = {recipe.ingredients} className="w-100"/>
                 </div>
-                <div className="row mx-3 d-flex justify-content-between">
-                    <StepsDisplay steps= {recipe.steps} className=""/>
+                <div className="row mx-3 d-flex flex-row justify-content-between">
+                    <StepsDisplay steps= {recipe.steps} className="col-lg-8"/>
+                    <InfoBlock recipe={recipe} className="col-lg-4"/>
 
                 </div>
                 <div className="row mx-3 my-5">
