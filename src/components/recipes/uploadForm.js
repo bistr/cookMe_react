@@ -17,7 +17,9 @@ class UploadForm extends React.Component
             ingredients:[],
             steps:[],
             equipment:{"grater":0, "grill":0, "microwave":0,"mixer":0,"pan":0,"pot":0,"stove":0,"toaster":0},
-            user_id:UserProfile.getName()
+            user_id:UserProfile.getName(),
+            error:0,
+            missing:[]
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -28,6 +30,7 @@ class UploadForm extends React.Component
         this.extractIngredients = this.extractIngredients.bind(this)
         this.extractNutritionalInfo = this.extractNutritionalInfo.bind(this)
         this.collectInfo = this.collectInfo.bind(this)
+        this.validateForm = this.validateForm.bind(this)
 
     }
 
@@ -128,6 +131,25 @@ class UploadForm extends React.Component
         return promise;
     }
 
+    validateForm()
+    {
+        let missing = [];
+        let required = ["name", "photo", "ingredients", "time", "difficulty", "price"]
+        required.forEach((field)=>{
+            if (!(field in this.state))
+            {
+                missing.push(field);
+            }
+            else if (this.state[field].length == 0)
+            {
+                missing.push(field);
+            }
+        });
+        this.setState({"missing":missing});
+        return missing;
+
+    }
+
 
 
 
@@ -136,6 +158,12 @@ class UploadForm extends React.Component
     handleSubmit(e)
     {
         e.preventDefault();
+        let missing = this.validateForm()
+        if (missing.length!=0)
+        {
+            this.setState({"error":1});
+            return;
+        }
         this.collectInfo()
         .then(()=>{
                 fetch('https://cook-me.herokuapp.com/upload', {
@@ -160,12 +188,14 @@ class UploadForm extends React.Component
 
     render()
     {
+        let errorMessage =""
+        this.state.missing.forEach((field)=>{errorMessage=errorMessage.concat("Fill "+field+".\n")});
 
         return(
             <div className="d-flex flex-column text-center m-2">
             <p className="h4 my-5">Tell us about your recipe!</p>
             <div className="row mx-3">
-                <SingleInput className="col-lg" name="name" handler={this.handleComponentChange}/>
+                <SingleInput className="col-lg" required="true" name="name" handler={this.handleComponentChange}/>
                 <SingleInput name="photo" className="col-lg" handler={this.handleComponentChange}/>
             </div>
             <hr />
@@ -188,10 +218,14 @@ class UploadForm extends React.Component
             <div className="row mt-3 justify-content-center align-items-center">
                 <RatingIcons name="price" handler={this.handleComponentChange}/>
             </div>
+            {
+                (this.state.error==1)?(<div class="alert alert-danger mt-3" role="alert">
+  <strong>Oops! </strong> {errorMessage}
+</div>):(<></>)
+            }
 
 
-
-            <button className="btn btn-info btn-block my-5" onClick={this.handleSubmit}>Submit</button>
+            <button type="submit" className="btn btn-info btn-block my-4" onClick={this.handleSubmit}>Submit</button>
 
             </div>
         )
