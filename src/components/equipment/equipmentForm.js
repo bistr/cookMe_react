@@ -1,6 +1,6 @@
 import React from 'react'
 import EquipmentCard from "./equipmentCard"
-import UserProfile from "./userProfile"
+import UserProfile from "../userProfile"
 
 class EquipmentForm extends React.Component
 {

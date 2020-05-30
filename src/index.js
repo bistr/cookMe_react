@@ -13,7 +13,7 @@ import PostForm from "./components/posts/postForm"
 import ProfilePage from "./components/profilePage"
 import Navigation from "./components/navigation"
 import CollectionPage from "./components/collections/collectionPage"
-import EquipmentForm from "./components/equipmentForm"
+import EquipmentForm from "./components/equipment/equipmentForm"
 import * as serviceWorker from './serviceWorker';
 
 const routing = (

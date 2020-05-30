@@ -1,5 +1,5 @@
 import React from 'react'
-import "../componentsStyle/cardStyle.css"
+import "../../componentsStyle/cardStyle.css"
 class EquipmentCard extends React.Component
 {
     constructor(props)
