@@ -22,6 +22,7 @@ class SingleInput extends React.Component
             closeButton = <CloseButton name={this.props.name} handler={this.props.close} className="mb-2 mr-sm-2"/>;
         }
         let placeholder = null;
+
         if("placeholder" in this.props)
         {
             placeholder = this.props.placeholder;
@@ -30,6 +31,11 @@ class SingleInput extends React.Component
         {
             placeholder = this.props.name.replace(/^\w/, c => c.toUpperCase());
         }
+        let type="text"
+        if("type" in this.props)
+        {
+            type = this.props.type;
+        }
 
         let className = "form-control mb-2 mr-sm-2 ";
         if ("className" in this.props)
@@ -37,18 +43,24 @@ class SingleInput extends React.Component
             className = className.concat(this.props.className);
         }
 
+        let requiredFlag = false;
+        if ("required" in this.props)
+        {
+            requiredFlag = true;
+        }
+
         if ("close" in this.props)
         {
             className = className.concat(" w-auto d-inline col-lg-8 col-10");
             return(
                 <div className="d-flex w-100 justify-content-center align-items-center">
-                <textarea className={className} placeholder={placeholder} type="text" rows="1" onChange={(e)=>this.changeValue(e)}/>
+                <textarea className={className} type = {type} placeholder={placeholder} rows="1" onChange={(e)=>this.changeValue(e)}/>
                 {closeButton}
                 </div>
             )
         }
         return(
-            <input className={className} placeholder={placeholder} type="text" onChange={(e)=>this.changeValue(e)}/>
+            <input className={className} required={requiredFlag} placeholder={placeholder} type = {type} onChange={(e)=>this.changeValue(e)}/>
         );
     }
 }

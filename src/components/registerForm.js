@@ -1,5 +1,7 @@
 import React from 'react'
 import { sha256 } from 'js-sha256';
+import SingleInput from "./genericInputs/singleInput"
+import UserProfile from "./userProfile"
 
 class RegisterForm extends React.Component
 {
@@ -9,35 +11,65 @@ class RegisterForm extends React.Component
 
         this.state =
         {
-            success: '',
-            message: ''
+            "username":"",
+            "password":"",
+            "real_name":"",
+            "bio":"",
+            "photo":""
         };
 
-        this.handleChange = this.handleChange.bind(this);
-        this.handleArrayChange = this.handleArrayChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleComponentChange = this.handleComponentChange.bind(this);
     }
 
-    handleChange(event)
+    handleComponentChange(nameOfField, valueOfField)
     {
-        this.setState({ [event.target.name]:event.target.value}, ()=>console.log(this.state));
+        this.setState({ [nameOfField]:valueOfField},()=>console.log(this.state));
     }
 
-    handleArrayChange(event)
-    {
-    }
 
     handleSubmit(e)
     {
-        e.preventDefault()
+        e.preventDefault();
+        if(this.state.username == "" || this.state.password=="")
+        {
+            return;
+        }
+        // let fields = ["username", "password", "real_name", "bio", "photo"];
+        // fields.forEach((field) => {
+        //     let value = document.getElementById(field).value;
+        //     this.setState({ [field]:value});
+        // });
+
+        // let username = document.getElementById("username").value;
+        // let password = document.getElementById("password").value;
+        // let real_name = document.getElementById("real_name");
+        // let bio = document.getElementById("bio");
+        // let photo = document.getElementByIdById("photo");
+        console.log(this.state);
         fetch('https://cook-me.herokuapp.com/register', {
           method: 'POST',// or 'PUT'
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({"username":this.state.username, "password":sha256(this.state.password)}),
+          body: JSON.stringify(this.state),
         })
         .then((response) => response.json())
+        .then((data)=>
+        {
+        if (data["status"]=="OK")
+        {
+            UserProfile.setName(data["id"]);
+            //redirect to profile
+            const win = window.open("/profile/"+UserProfile.getName());
+        }
+        else if(data["status"]=="Username taken"){
+            alert("Username taken")
+        }
+        else {
+            alert("what happened?????")
+        }
+    })
         .then((data) => {
           console.log(data);
         })
@@ -50,15 +82,15 @@ class RegisterForm extends React.Component
     {
         return(
             <form onSubmit={this.handleSubmit} className="w-75">
-                <div className="form-group">
-                    <label>Username</label>
-                    <input type="text" className="form-control" placeholder="Username" name="username" required onChange={this.handleChange} />
-                </div>
-                <div className="form-group">
-                    <label>Password</label>
-                    <input type="password" className="form-control" placeholder="Password" name="password" required onChange={this.handleChange} />
-                </div>
-                <button onClick={(e)=>this.handleSubmit(e)}>Submit</button>
+
+                <SingleInput name="username" required="true" handler={this.handleComponentChange}/>
+                <SingleInput name="password" required="true" type="password" handler={this.handleComponentChange}/>
+                <SingleInput name="real_name" handler={this.handleComponentChange}/>
+                <SingleInput name="bio" handler={this.handleComponentChange} />
+                <SingleInput name="photo" handler={this.handleComponentChange} />
+
+
+                <input type="submit" onClick={(e)=>this.handleSubmit(e)}/>
         </form>
         )
     }

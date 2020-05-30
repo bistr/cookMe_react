@@ -1,4 +1,5 @@
 import React from 'react'
+import UserProfile from "../userProfile"
 
 
 
@@ -7,7 +8,7 @@ class AddForm extends React.Component
     constructor(props)
     {
         super(props);
-        this.state = {userID: 1, newCollections:[]}
+        this.state = {user_id: UserProfile.getName(), newCollections:[], collections:[]}
         this.handleChange = this.handleChange.bind(this);
         this.handleInput = this.handleInput.bind(this);
         this.fetchCollections = this.fetchCollections.bind(this);
@@ -20,12 +21,12 @@ class AddForm extends React.Component
     fetchCollections()
     {
         //let fakeURL = 'https://5e7ce6e0a917d700166840b4.mockapi.io/postsByRecipe/'+recipeId
-        let userID = 1;
-        let realURL = "https://cook-me.herokuapp.com/users/"+userID+"/collections_without/"+this.props.recipe_id;
+        let realURL = "https://cook-me.herokuapp.com/users/"+this.state.user_id+"/collections_without/"+this.props.recipe_id;
         fetch(realURL)
         .then(res => res.json())
         .then((data) => {
-          this.setState({ collections: data }, ()=>console.log(this.state))
+         this.setState({ collections: data }, ()=>console.log(this.state))
+
       })
         .catch(console.log)
     }
@@ -74,7 +75,7 @@ class AddForm extends React.Component
     {
         let requestBody = {
             "name":this.state.name,
-            "user_id":this.state.userID
+            "user_id":this.state.user_id
         }
         fetch('https://cook-me.herokuapp.com/add_collection', {
           method: 'POST',// or 'PUT'
@@ -85,7 +86,7 @@ class AddForm extends React.Component
         })
         .then((response) => response.json())
         .then((data) => {
-          this.fetchCollections(this.state.userID);
+          this.fetchCollections(this.state.user_id);
         })
         .catch((error) => {
           console.error('Error:', error);
@@ -140,11 +141,15 @@ class AddForm extends React.Component
                 <p class="h4 mb-4">Add to collection</p>
                 <div class="btn-group-vertical w-100 ">
                 {
-                    this.props.collections.map((collection) => (
+                    (Object.keys(this.state.collections).length == 0)?(this.props.collections.map((collection) => (
                         <button type="button" id={collection.id} class="btn btn-outline-info btn-lg btn-block text-left my-1" onClick={this.handleClick}>
                         {plusSign} {collection.name}
                         </button>
-                    ))
+                    ))):(this.state.collections.map((collection) => (
+                        <button type="button" id={collection.id} class="btn btn-outline-info btn-lg btn-block text-left my-1" onClick={this.handleClick}>
+                        {plusSign} {collection.name}
+                        </button>
+                    )))
                 }
                 <div class="input-group my-1">
                 <input type="text" class="form-control" name="name" placeholder="New collection name" onChange={this.handleInput}/>

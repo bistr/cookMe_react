@@ -21,7 +21,7 @@ class LoginForm extends React.Component
     {
         let username = document.getElementById("username").value;
         let password = document.getElementById("password").value;
-        e.preventDefault()
+        event.preventDefault()
         fetch('https://cook-me.herokuapp.com/login', {
           method: 'POST',// or 'PUT'
           headers: {
@@ -30,6 +30,25 @@ class LoginForm extends React.Component
           body: JSON.stringify({"username":username, "password":password}),
         })
         .then((response) => response.json())
+        .then((data)=>
+    {
+        if (data["status"]=="OK")
+        {
+            UserProfile.setName(data["id"]);
+            //redirect to profile
+            const win = window.open("/profile/"+UserProfile.getName());
+        }
+        else if(data["status"]=="Wrong password")
+        {
+            alert("wrong password")
+        }
+        else if(data["status"]=="User doesn't exist"){
+            alert("No such user")
+        }
+        else {
+            alert("what happened?????")
+        }
+    })
         .then((data) => {
           console.log(data);
         })
@@ -44,43 +63,15 @@ class LoginForm extends React.Component
     }
 
 
-
-    // handleSubmit(e)
-    // {
-    //     e.preventDefault()
-    //     fetch('https://cook-me.herokuapp.com/login', {
-    //       method: 'POST',// or 'PUT'
-    //       headers: {
-    //         'Content-Type': 'application/json'
-    //       },
-    //       body: JSON.stringify({"username":this.state.username, "password":sha256(this.state.password)}),
-    //     })
-    //     .then((response) => response.json())
-    //     .then((data) => {
-    //       console.log(data);
-    //     })
-    //     .catch((error) => {
-    //       console.error('Error:', error);
-    //     });
-    // }
-    // <div className="form-group">
-    //     <label>Username</label>
-    //     <input type="text" className="form-control" placeholder="Username" name="username" required onChange={this.handleChange} />
-    // </div>
-    // <div className="form-group">
-    //     <label>Password</label>
-    //     <input type="password" className="form-control" placeholder="Password" name="password" required onChange={this.handleChange} />
-    // </div>
-
     render()
     {
         return(
             <form onSubmit={this.handleSubmit} className="w-75">
 
                 <label htmlFor="username">Which user are you?</label>
-                <input id="username" type="text" className="form-control" placeholder="Username"  />
+                <input id="username" type="text" required className="form-control" placeholder="Username"  />
                 <label htmlFor="password">Password</label>
-                <input id="password" type="password" className="form-control" placeholder="Password"  />
+                <input id="password" type="password" required className="form-control" placeholder="Password"  />
                 <button onClick={(e)=>this.handleSubmit(e)}>Submit</button>
         </form>
         )
