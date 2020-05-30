@@ -61,9 +61,6 @@ class EquipmentIcons extends React.Component
         const tools = ["grater", "grill", "microwave","mixer","pan","pot","stove","toaster"];
         return(
             <>
-            <div class="row my justify-content-center">
-                <p className="display-4 my-3">What kinds of kitchenware do you own?</p>
-            </div>
             <div class="row my-3 justify-content-center">
                 <div className="card-deck mx-5 ">
                   {tools.map((tool) => (
