@@ -19,8 +19,28 @@ class LoginForm extends React.Component
 
     handleSubmit(event)
     {
-        let userId = document.getElementById("userid").value;
-        UserProfile.setName(userId);
+        let username = document.getElementById("username").value;
+        let password = document.getElementById("password").value;
+        e.preventDefault()
+        fetch('https://cook-me.herokuapp.com/login', {
+          method: 'POST',// or 'PUT'
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({"username":username, "password":password}),
+        })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+
+
+
+
+        //UserProfile.setName(userId);
     }
 
 
@@ -57,8 +77,10 @@ class LoginForm extends React.Component
         return(
             <form onSubmit={this.handleSubmit} className="w-75">
 
-                <label>Which user are you?</label>
-                <input type="number" className="form-control" placeholder="user id" id="userid" />
+                <label htmlFor="username">Which user are you?</label>
+                <input id="username" type="text" className="form-control" placeholder="Username"  />
+                <label htmlFor="password">Password</label>
+                <input id="password" type="password" className="form-control" placeholder="Password"  />
                 <button onClick={(e)=>this.handleSubmit(e)}>Submit</button>
         </form>
         )

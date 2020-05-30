@@ -32,13 +32,14 @@ class CardList extends React.Component
     render()
     {
         //think about a more button
+        let classNameString = `card-deck ${ this.props.className }`;
         if (this.props.items == null)
         {
             return null;
         }
         const {items} = this.props;
         return (
-          <div className="card-deck">
+          <div className={classNameString}>
             {items.map((item) => this.makeComponent(item))}
           </div>
         )
