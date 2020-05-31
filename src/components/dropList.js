@@ -18,7 +18,11 @@ class DropList extends React.Component {
         let currentItems = this.state.items;
 
         currentItems.push(item);
-        this.setState({"items":currentItems}, ()=>{this.props.handler(this.props.mealNumber, this.state.items);});
+        this.setState({"items":currentItems}, ()=>{
+            this.props.handler(this.props.mealNumber, this.state.items.map((item)=>item.id));
+            this.props.calorieCounter(this.props.mealNumber, this.getAllCalories());
+        });
+
     }
 
     removeItem(recipe)
@@ -33,7 +37,10 @@ class DropList extends React.Component {
         }
         // currentItems.push(item);
         // onClick={this.removeItem(recipe)}
-        this.setState({"items":currentItems}, ()=>{this.props.handler(this.props.mealNumber, this.state.items);});
+        this.setState({"items":currentItems}, ()=>{
+            this.props.handler(this.props.mealNumber, this.state.items.map((item)=>item.id));
+            this.props.calorieCounter(this.props.mealNumber, this.getAllCalories());
+        });
 
 
     }

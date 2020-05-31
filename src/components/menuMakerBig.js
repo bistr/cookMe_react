@@ -12,9 +12,11 @@ class MenuMakerBig extends React.Component {
         this.fetchRecipes = this.fetchRecipes.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.dayChangeHandler = this.dayChangeHandler.bind(this);
+        this.submitHandler = this.submitHandler.bind(this);
         this.state = {
             recipes: [],
-            user_id: current_user_id
+            user_id: current_user_id,
+            days:{}
         };
         this.fetchRecipes(this.state.user_id);
     }
@@ -37,7 +39,6 @@ class MenuMakerBig extends React.Component {
         {
             document.getElementById("menumaker"+day).style.display = 'none';
         }
-        console.log("hidden")
     }
 
     dayChangeHandler(event)
@@ -56,7 +57,34 @@ class MenuMakerBig extends React.Component {
 
     handleChange(day, item)
     {
-        this.setState({ [day]: item}, ()=>{console.log(this.state)});
+        let currentDays = this.state.days;
+        currentDays[day] = item;
+        this.setState({ "days": currentDays}, ()=>{console.log(this.state)});
+    }
+
+    submitHandler()
+    {
+        let requestBody = {
+            "user_id":this.state.user_id,
+            "length":7,
+            "days":this.state.days,
+            "name":"test"
+        }
+        console.log(JSON.stringify(requestBody));
+        fetch('https://cook-me.herokuapp.com/upload-menu', {
+          method: 'POST',// or 'PUT'
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(requestBody),
+        })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
     }
 
     render()
@@ -79,28 +107,32 @@ class MenuMakerBig extends React.Component {
                 <button type="button" id="5" className="btn btn-secondary" onClick={this.dayChangeHandler}>5</button>
                 <button type="button" id="6" className="btn btn-secondary" onClick={this.dayChangeHandler}>6</button>
                 <button type="button" id="7" className="btn btn-secondary" onClick={this.dayChangeHandler}>7</button>
+                <button type="button" className="btn btn-secondary" onClick={this.submitHandler}>V</button>
             </div>
+            </div>
+            <div className="col-6" style={{ height: "100%", padding: "20px" }}>
+                <DragList items={this.state.recipes}/>
             </div>
 
-            <div className="col-11" id="menumaker1">
+            <div className="col-5" id="menumaker1">
                 <MenuMaker day="1" recipes={this.state.recipes} handler={this.handleChange}/>
             </div>
-            <div className="col-11" id="menumaker2">
+            <div className="col-5" id="menumaker2">
                 <MenuMaker day="2" recipes={this.state.recipes} handler={this.handleChange}/>
             </div>
-            <div className="col-11" id="menumaker3">
+            <div className="col-5" id="menumaker3">
                 <MenuMaker day="3" recipes={this.state.recipes} handler={this.handleChange}/>
             </div>
-            <div className="col-11" id="menumaker4">
+            <div className="col-5" id="menumaker4">
                 <MenuMaker day="4" recipes={this.state.recipes} handler={this.handleChange}/>
             </div>
-            <div className="col-11" id="menumaker5">
+            <div className="col-5" id="menumaker5">
                 <MenuMaker day="5" recipes={this.state.recipes} handler={this.handleChange}/>
             </div>
-            <div className="col-11" id="menumaker6">
+            <div className="col-5" id="menumaker6">
                 <MenuMaker day="6" recipes={this.state.recipes} handler={this.handleChange}/>
             </div>
-            <div className="col-11" id="menumaker7">
+            <div className="col-5" id="menumaker7">
                 <MenuMaker day="7" recipes={this.state.recipes} handler={this.handleChange}/>
             </div>
             </div>

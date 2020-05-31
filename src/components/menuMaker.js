@@ -8,34 +8,46 @@ class MenuMaker extends React.Component {
         super(props);
         let current_user_id = UserProfile.getName();
         this.handleChange=this.handleChange.bind(this);
+        this.calorieCounter = this.calorieCounter.bind(this);
         this.getAllCalories = this.getAllCalories.bind(this);
         this.state = {
-            1:[],
-            2:[],
-            3:[]
+            meals:{
+                1:[],
+                2:[],
+                3:[]
+            },
+            calories:{
+                "1":0,
+                "2":0,
+                "3":0
+            }
+
         };
     }
 
     handleChange(number, items)
     {
-        this.setState({ [number]:items}, ()=>{this.props.handler(this.props.day, this.state)});
+        let meals = this.state.meals;
+        meals[number] = items;
+        this.setState({ "meals":meals}, ()=>{this.props.handler(this.props.day, this.state.meals)});
     }
 
     getAllCalories()
     {
         let result = 0;
-        this.state["1"].forEach((item) => {
-            result+=item.nutrientInfo.Calories;
-        });
-        this.state["2"].forEach((item) => {
-            result+=item.nutrientInfo.Calories;
-        });
-        this.state["3"].forEach((item) => {
-            result+=item.nutrientInfo.Calories;
-        });
+        result+=parseInt(this.state["calories"]["1"]);
+        result+=parseInt(this.state["calories"]["2"]);
+        result+=parseInt(this.state["calories"]["3"]);
 
         return result;
 
+    }
+
+    calorieCounter(meal, calories)
+    {
+        let currentCalories = this.state.calories
+        currentCalories[meal] = calories
+        this.setState({ "calories": currentCalories});
     }
 
 
@@ -44,25 +56,23 @@ class MenuMaker extends React.Component {
     {
         return (
             <>
-                <div className="row" style={{ height: "100%" }}>
-                    <div className="col-6" style={{ height: "100%", padding: "20px" }}>
-                        <DragList items={this.props.recipes}/>
-                    </div>
-                    <div className="col-6 d-flex flex-column" style={{ height: "100%", padding: "20px" }}>
+
+
+                    <div className="d-flex flex-column" style={{ height: "100%", padding: "20px" }}>
                         <div className="row"  style={{ height: "50%" }}>
-                            <DropList name="Breakfast" mealNumber="1" handler={this.handleChange} />
+                            <DropList name="Breakfast" mealNumber="1" handler={this.handleChange} calorieCounter={this.calorieCounter} />
                         </div>
                         <div className="row" style={{ height: "50%" }}>
-                            <DropList name="Lunch" mealNumber="2" handler={this.handleChange}/>
+                            <DropList name="Lunch" mealNumber="2" handler={this.handleChange} calorieCounter={this.calorieCounter}/>
                         </div>
                         <div className="row" style={{ height: "50%" }}>
-                            <DropList name="Dinner" mealNumber="3" handler={this.handleChange}/>
+                            <DropList name="Dinner" mealNumber="3" handler={this.handleChange} calorieCounter={this.calorieCounter}/>
                         </div>
                         <div className="row" style={{ height: "50%" }}>
                             <p className="float-right">{this.getAllCalories()} calories total</p>
                         </div>
                     </div>
-                </div>
+
             </>
         );
     }
