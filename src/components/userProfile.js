@@ -2,6 +2,10 @@ var UserProfile = (function() {
   var id = "";
 
   var getName = function() {
+      if (localStorage.getItem("user_id") == null)
+      {
+          return "";
+      }
     return localStorage.getItem("user_id");
     // return id;    // Or pull this from cookie/localStorage
   };

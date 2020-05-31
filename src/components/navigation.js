@@ -20,7 +20,7 @@ class Navigation extends React.Component
 
     render()
     {
-
+        console.log(UserProfile.getName())
         let str = `/profile/${UserProfile.getName()}`;
         return(
             <div className="fixed-top bg-white">

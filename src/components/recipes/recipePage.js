@@ -85,6 +85,7 @@ class RecipePage extends React.Component
         {
             return null;
         }
+        console.log(this.state)
         const {recipe} = this.state;
         return (
 
@@ -120,7 +121,9 @@ class RecipePage extends React.Component
                 </div>
                 <div className="row mx-3 my-5">
                     <p> Posts about {recipe.name} </p>
-                    <CardList type="posts" items={this.state.posts}/>
+                </div>
+                <div className="row mx-3 my-5">
+                    <CardList type="posts" className="post-card-deck" items={this.state.posts}/>
                 </div>
 
             </>

@@ -17,7 +17,7 @@ class CardList extends React.Component
     {
         if (this.props.type === "recipes")
         {
-            return <RecipeCard recipe={item} className="fixed-height"/>;
+            return <RecipeCard recipe={item} className="fixed-height "/>;
         }
         if (this.props.type === "posts")
         {

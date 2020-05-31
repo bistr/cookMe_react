@@ -19,7 +19,10 @@ class UploadForm extends React.Component
             equipment:{"grater":0, "grill":0, "microwave":0,"mixer":0,"pan":0,"pot":0,"stove":0,"toaster":0},
             user_id:UserProfile.getName(),
             error:0,
-            missing:[]
+            missing:[],
+            vegan:false,
+            "gluten-free":false,
+            vegetarian:false
         };
 
         this.handleChange = this.handleChange.bind(this);

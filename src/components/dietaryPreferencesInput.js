@@ -16,8 +16,9 @@ class DietaryPreferencesInput extends React.Component
 
     changeValue(e)
     {
-        let currentValue = this.state[e.target.name];
-        this.setState({ [e.target.name]: !currentValue}, ()=> this.props.handler(this.props.name, this.state));
+        let preference = e.target.name;
+        let currentValue = this.state[preference];
+        this.setState({ [preference]: !currentValue}, ()=> this.props.handler(preference, !currentValue));
     }
 
 
