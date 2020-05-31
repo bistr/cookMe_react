@@ -14,6 +14,7 @@ import ProfilePage from "./components/profilePage"
 import Navigation from "./components/navigation"
 import CollectionPage from "./components/collections/collectionPage"
 import EquipmentForm from "./components/equipment/equipmentForm"
+import MenuMaker from "./components/menuMaker"
 import * as serviceWorker from './serviceWorker';
 
 const routing = (
@@ -32,6 +33,7 @@ const routing = (
         <Route path = "/profile/:id" component = {ProfilePage} />
         <Route path = "/collections/:id" component = {CollectionPage} />
         <Route path = "/equipment/" component = {EquipmentForm} />
+        <Route path = "/menumaker/" component = {MenuMaker} />
       </Switch>
       </div>
 
