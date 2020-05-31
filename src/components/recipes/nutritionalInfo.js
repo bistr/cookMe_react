@@ -12,7 +12,7 @@ class NutritionalInfo extends React.Component
     render()
     {
         console.log(this.props)
-        if (this.props.info==null || this.props.info.length == 0)
+        if (this.props.info===null || this.props.info.length === 0)
         {
             return null;
         }
@@ -30,10 +30,10 @@ class NutritionalInfo extends React.Component
                 </tr>
             </thead>
                   <tbody className="w-100">
-                  {this.props.info.map((nutrient) => (
+                  {Object.keys(this.props.info).map((nutrient) => (
                       <tr>
-                        <th scope="row">{nutrient.name}</th>
-                        <td>{nutrient.value}</td>
+                        <th scope="row">{nutrient}</th>
+                        <td>{this.props.info[nutrient]}</td>
                       </tr>
                   ))}
                   </tbody>

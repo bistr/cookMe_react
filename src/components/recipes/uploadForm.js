@@ -52,7 +52,7 @@ class UploadForm extends React.Component
     openRecipePage(id)
     {
         const win = window.open("/recipe/"+id);
-        if (win != null) {
+        if (win !== null) {
             win.focus();
         }
     }
@@ -143,7 +143,7 @@ class UploadForm extends React.Component
             {
                 missing.push(field);
             }
-            else if (this.state[field].length == 0)
+            else if (this.state[field].length === 0)
             {
                 missing.push(field);
             }
@@ -162,7 +162,7 @@ class UploadForm extends React.Component
     {
         e.preventDefault();
         let missing = this.validateForm()
-        if (missing.length!=0)
+        if (missing.length!==0)
         {
             this.setState({"error":1});
             return;
@@ -222,7 +222,7 @@ class UploadForm extends React.Component
                 <RatingIcons name="price" handler={this.handleComponentChange}/>
             </div>
             {
-                (this.state.error==1)?(<div class="alert alert-danger mt-3" role="alert">
+                (this.state.error===1)?(<div class="alert alert-danger mt-3" role="alert">
   <strong>Oops! </strong> {errorMessage}
 </div>):(<></>)
             }

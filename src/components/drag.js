@@ -1,6 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
-import * as dropEffects from "./dropEffects";
 
 const draggingStyle = {
     opacity: 0.25,
@@ -15,7 +13,6 @@ class Drag extends React.Component
         this.state = {isDragging:false};
         this.startDragging = this.startDragging.bind(this);
         this.endDragging = this.endDragging.bind(this);
-        console.log(this.props.children)
     }
 
     startDragging(event)

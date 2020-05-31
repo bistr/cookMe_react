@@ -121,7 +121,7 @@ class AddForm extends React.Component
 
     render()
     {
-        if (this.props.collections == null)
+        if (this.props.collections === null)
         {
             return null;
         }
@@ -141,7 +141,7 @@ class AddForm extends React.Component
                 <p class="h4 mb-4">Add to collection</p>
                 <div class="btn-group-vertical w-100 ">
                 {
-                    (Object.keys(this.state.collections).length == 0)?(this.props.collections.map((collection) => (
+                    (Object.keys(this.state.collections).length === 0)?(this.props.collections.map((collection) => (
                         <button type="button" id={collection.id} class="btn btn-outline-info btn-lg btn-block text-left my-1" onClick={this.handleClick}>
                         {plusSign} {collection.name}
                         </button>

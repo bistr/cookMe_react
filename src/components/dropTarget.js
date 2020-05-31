@@ -28,7 +28,6 @@ class DropTarget extends React.Component {
     drop(event)
     {
         const droppedItem = event.dataTransfer.getData("drag-item");
-        console.log(droppedItem);
         if (droppedItem) {
             this.props.onItemDropped(JSON.parse(droppedItem));
         }
@@ -54,7 +53,7 @@ class DropTarget extends React.Component {
                 onDrop={this.drop}
                 onDragEnter={this.draggingEnter}
                 onDragLeave={this.draggingLeave}
-                style={{ width: "100%", height: "30%", ...(this.state.isOver ? insideStyle : {}) }}
+                style={{ width: "100%", ...(this.state.isOver ? insideStyle : {}) }}
             >
                 {this.props.children}
             </div>

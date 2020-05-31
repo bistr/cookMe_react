@@ -100,7 +100,7 @@ class RecipePage extends React.Component
                     <h1>{recipe.name}</h1>
                     <div class="d-flex align-items-center">
                     {
-                        (this.state.user_id!="")?
+                        (this.state.user_id!=="")?
                         <>
                         <button className="btn btn-success flex-shrink mx-2 rounded-lg" name="postModal" onClick={()=>this.toggleModal("postModal")}> I cooked this! </button>
                         <button className= "btn btn-info flex-shrink mx-2 rounded-lg" name="addModal" onClick={()=>this.toggleModal("addModal")}> Add to collection </button>

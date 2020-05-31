@@ -11,13 +11,12 @@ class DragList extends React.Component {
 
     render()
     {
-        if(this.state.items == [])
+        if(this.state.items === [])
         {
             return;
         }
-        console.log(this.props.items);
         return (
-            <div className="drag-drop-container list-group">
+            <div className="drag-drop-container flex-grow list-group">
                 {this.props.items.map(item => (
                     <Drag key={item.id} dataItem={JSON.stringify(item)}>
                         <RecipeIcon recipe={item}/>

@@ -7,7 +7,7 @@ class RecipeCard extends React.Component
     {
         e.preventDefault();
         console.log(id);
-        const win = window.open("/recipe/"+id);
+        window.open("/recipe/"+id);
     }
     render()
     {

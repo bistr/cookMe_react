@@ -7,7 +7,7 @@ import CloseButton from "./closeButton"
 class Modal extends React.Component {
 
   render() {
-    if (this.props.show != true)
+    if (this.props.show !== true)
     {
         return null;
     }

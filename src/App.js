@@ -18,7 +18,6 @@ class App extends Component {
       }
 
     componentDidMount() {
-        let fakeURL = 'https://5e7ce6e0a917d700166840b4.mockapi.io/allRecipes'
         let realURL = 'https://cook-me.herokuapp.com/recipes'
         fetch(realURL)
         .then(res => res.json())

@@ -1,5 +1,4 @@
 import React from 'react'
-import { sha256 } from 'js-sha256';
 import SingleInput from "./genericInputs/singleInput"
 import UserProfile from "./userProfile"
 
@@ -31,7 +30,7 @@ class RegisterForm extends React.Component
     handleSubmit(e)
     {
         e.preventDefault();
-        if(this.state.username == "" || this.state.password=="")
+        if(this.state.username === "" || this.state.password==="")
         {
             return;
         }
@@ -57,13 +56,13 @@ class RegisterForm extends React.Component
         .then((response) => response.json())
         .then((data)=>
         {
-        if (data["status"]=="OK")
+        if (data["status"]==="OK")
         {
             UserProfile.setName(data["id"]);
             //redirect to profile
             const win = window.open("/profile/"+UserProfile.getName());
         }
-        else if(data["status"]=="Username taken"){
+        else if(data["status"]==="Username taken"){
             alert("Username taken")
         }
         else {

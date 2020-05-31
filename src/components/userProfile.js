@@ -1,5 +1,4 @@
 var UserProfile = (function() {
-  var id = "";
 
   var getName = function() {
       if (localStorage.getItem("user_id") == null)
@@ -11,7 +10,6 @@ var UserProfile = (function() {
   };
 
   var setName = function(user_id) {
-    id = user_id;
     localStorage.setItem('user_id', user_id);
     // Also set this in cookie/localStorage
   };
