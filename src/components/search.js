@@ -6,7 +6,7 @@ import Filters from "./filters"
 
 
 
-class MenuCreator extends React.Component {
+class Search extends React.Component {
       constructor(props)
       {
           super(props)
@@ -65,4 +65,4 @@ class MenuCreator extends React.Component {
 
 
 
-export default MenuCreator;
+export default Search;

@@ -14,11 +14,23 @@ class Filters extends React.Component {
           this.state={};
           this.handleChange = this.handleChange.bind(this);
           this.handleSlider = this.handleSlider.bind(this);
+          this.handleFilter = this.handleFilter.bind(this);
+          this.handleInput = this.handleInput.bind(this);
 
       }
 
       handleChange(name, value)
       {
+          if (name === "vegan" || name==="vegetarian" || name==="gluten-free")
+          {
+              if (value === false)
+              {
+                  let currentState = this.state;
+                  delete currentState[name]
+                  this.setState(currentState)
+                  return;
+              }
+          }
           this.setState({ [name]:value}, ()=>console.log(this.state));
       }
 
@@ -27,12 +39,33 @@ class Filters extends React.Component {
           this.setState({ "calories":event.target.value}, ()=>console.log(this.state));
       }
 
+      handleFilter()
+      {
+          this.props.handler(this.state);
+      }
+
+      handleInput()
+      {
+          let value = document.getElementById("inputName").value;
+          if (value === "")
+          {
+              let currentState = this.state;
+              delete currentState["name"]
+              this.setState(currentState)
+              return;
+          }
+          this.setState( {"name":value})
+      }
+
 
 
   render() {
     return (
     <>
     <div class={"d-flex flex-column "+this.props.className}>
+                <input className="form-control" id="inputName" placeholder="What are you looking for?" onChange={this.handleInput}></input>
+                <div class="dropdown-divider">
+                </div>
                 <DietaryPreferencesInput  handler={this.handleChange} />
                 <div class="dropdown-divider">
                 </div>
@@ -47,7 +80,7 @@ class Filters extends React.Component {
                 <section className="my-4">
                     <RatingIcons name="difficulty" handler={this.handleChange} />
                 </section>
-                <button className="btn btn-primary my-2">Filter</button>
+                <button className="btn btn-primary my-2" onClick={this.handleFilter}>Filter</button>
 
     </div>
      </>

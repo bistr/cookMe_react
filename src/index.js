@@ -4,7 +4,6 @@ import './index.css';
 import App from './App';
 import { Route, Link, BrowserRouter as Router, Switch } from 'react-router-dom'
 import RecipePage from "./components/recipes/recipePage"
-import SearchForm from "./components/searchForm"
 import RegisterForm from "./components/registerForm"
 import LoginForm from "./components/loginForm"
 import UploadForm from "./components/recipes/uploadForm"
@@ -17,6 +16,7 @@ import EquipmentForm from "./components/equipment/equipmentForm"
 import MenuDisplayer from "./components/menuDisplayer"
 import MenuEditor from "./components/menuEditor"
 import MenuCreator from "./components/menuCreator"
+import Search from "./components/search"
 import * as serviceWorker from './serviceWorker';
 
 const routing = (
@@ -26,7 +26,7 @@ const routing = (
       <Switch>
         <Route exact path="/" component={App} />
         <Route path="/recipe/:id" component={RecipePage} />
-        <Route path = "/search" component = {SearchForm} />
+        <Route path = "/search" component = {Search} />
         <Route path = "/register" component = {RegisterForm} />
         <Route path = "/login" component = {LoginForm} />
         <Route path = "/upload" component = {UploadForm} />
