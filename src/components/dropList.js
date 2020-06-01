@@ -6,21 +6,25 @@ class DropList extends React.Component {
     constructor(props)
     {
         super(props);
-        if (!this.props.recipes)
-        {
-            this.state={items:[]};
-        }
-        else if (!this.props.recipes[this.props.mealNumber])
-        {
-            this.state={items:[]};
-        }
-        else
-        {
-            this.state={items:this.props.recipes[this.props.mealNumber]};
-            this.props.handler(this.props.mealNumber, this.state.items.map((item)=>item.id));
-        }
 
-        console.log(this.props.recipes);
+
+            if (!this.props.recipes)
+            {
+                this.state={items:[]};
+            }
+            else if (!this.props.recipes[this.props.mealNumber])
+            {
+                this.state={items:[]};
+            }
+            else
+            {
+                this.state={items:this.props.recipes[this.props.mealNumber]};
+                this.props.handler(this.props.mealNumber, this.state.items.map((item)=>item.id));
+            }
+
+            console.log(this.props.recipes);
+
+
 
         this.itemDropped = this.itemDropped.bind(this);
         this.removeItem = this.removeItem.bind(this);

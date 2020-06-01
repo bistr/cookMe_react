@@ -23,7 +23,10 @@ class RecipeIcon extends React.Component
             :<></>
         }
           {recipe.name}
-          <span className="badge badge-primary badge-pill">{recipe.nutrientInfo.Calories}</span>
+          {
+              (recipe.nutrientInfo)?<span className="badge badge-primary badge-pill">{recipe.nutrientInfo.Calories}</span>:<></>
+          }
+
         </li>
         )
     }

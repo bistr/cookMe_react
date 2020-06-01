@@ -2,6 +2,7 @@
 import React from 'react';
 import RecipeColumns from './recipes/recipeColumns';
 import Filters from "./filters"
+import RecipeCard from "./recipes/recipeCard"
 
 
 
@@ -54,7 +55,11 @@ class Search extends React.Component {
         {(this.state.recipes.length>0)?(<></>):<div class="alert alert-light" role="alert">
       <strong>No results!</strong> You need to change your search parameters.
   </div>}
-        <RecipeColumns className="recipe-card-deck col-9" recipes = {this.state.recipes}/>
+        <RecipeColumns className="recipe-card-deck col-9" recipes = {this.state.recipes}>
+        {this.state.recipes.map((recipe) => (
+            <RecipeCard key={recipe.id} recipe={recipe}/>
+        ))}
+        </RecipeColumns>
 
       </div>
 

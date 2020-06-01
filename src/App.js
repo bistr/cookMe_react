@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import RecipeColumns from './components/recipes/recipeColumns';
 import "./index.css"
 import "./App.css"
+import RecipeCard from "./components/recipes/recipeCard"
 
 
 
@@ -67,7 +68,11 @@ class App extends Component {
       </div>
       <input type="text" class="form-control" placeholder="What are you looking for?" aria-label="Text input with dropdown button"/>
     </div>
-      <RecipeColumns recipes = {this.state.recipes}/>
+      <RecipeColumns recipes = {this.state.recipes}>
+      {this.state.recipes.map((recipe) => (
+          <RecipeCard key={recipe.id} recipe={recipe}/>
+      ))}
+      </RecipeColumns>
       </>
     );
   }
