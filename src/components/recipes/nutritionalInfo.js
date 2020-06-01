@@ -30,7 +30,7 @@ class NutritionalInfo extends React.Component
                 </tr>
             </thead>
                   <tbody className="w-100">
-                  {Object.keys(this.props.info).map((nutrient) => (
+                  {["Calories", "Salt", "Fat", "Sugar", "Protein"].map((nutrient) => (
                       <tr>
                         <th scope="row">{nutrient}</th>
                         <td>{this.props.info[nutrient]}</td>

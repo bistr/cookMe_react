@@ -99,7 +99,7 @@ class RatingIcons extends React.Component
 
         return(
             <>
-            <h4 class="text-capitalize text-dark mx-4 w-60 rating-text">{this.props.name}</h4>
+            <label class="text-capitalize text-dark mx-4 w-60 rating-text">{this.props.name}</label>
             <img className="rating-icon" onMouseOver={this.hoverHandler} onClick={this.clickHandler} alt="rating1" onMouseLeave={this.leaveHandler} src={imgSource} id={this.props.name+"1"}/>
             <img className="rating-icon" onMouseOver={this.hoverHandler} onClick={this.clickHandler} alt="rating2" onMouseLeave={this.leaveHandler} src={imgSource} id={this.props.name+"2"}/>
             <img className="rating-icon" onMouseOver={this.hoverHandler} onClick={this.clickHandler} alt="rating3" onMouseLeave={this.leaveHandler} src={imgSource} id={this.props.name+"3"}/>

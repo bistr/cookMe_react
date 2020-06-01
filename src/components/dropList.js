@@ -6,7 +6,22 @@ class DropList extends React.Component {
     constructor(props)
     {
         super(props);
-        this.state={items:[]};
+        if (!this.props.recipes)
+        {
+            this.state={items:[]};
+        }
+        else if (!this.props.recipes[this.props.mealNumber])
+        {
+            this.state={items:[]};
+        }
+        else
+        {
+            this.state={items:this.props.recipes[this.props.mealNumber]};
+            this.props.handler(this.props.mealNumber, this.state.items.map((item)=>item.id));
+        }
+
+        console.log(this.props.recipes);
+
         this.itemDropped = this.itemDropped.bind(this);
         this.removeItem = this.removeItem.bind(this);
         this.getAllCalories = this.getAllCalories.bind(this);
@@ -57,12 +72,13 @@ class DropList extends React.Component {
 
     render()
     {
+
         return (
             <DropTarget onItemDropped={this.itemDropped}>
                 <h2>{this.props.name} <small className="float-right">{this.getAllCalories()}</small></h2>
                 <div className="drag-drop-container flex-grow list-group">
                     {this.state.items.map(recipe => (
-                        <RecipeIcon recipe={recipe} key={recipe.id} id={recipe.id} onClick={this.removeItem} closeable="true"/>
+                        <RecipeIcon recipe={recipe} key={recipe.id} id={recipe.id} onClick={this.removeItem} closeable={this.props.editable}/>
                     ))}
                 </div>
             </DropTarget>

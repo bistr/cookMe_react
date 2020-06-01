@@ -1,7 +1,7 @@
 import React from 'react'
 import "../../componentsStyle/cardStyle.css"
 
-class RecipeCard extends React.Component
+class RecipeIcon extends React.Component
 {
     handleClick()
     {
@@ -16,7 +16,7 @@ class RecipeCard extends React.Component
 
         <li className="list-group-item d-flex justify-content-between align-items-center">
         {
-            ("closeable" in this.props)?
+            ("closeable" in this.props && this.props.closeable===true)?
             <button type="button" className="close" aria-label="Close" onClick={()=>this.props.onClick(recipe)}>
                 <span className="float-right" aria-hidden="true">&times;</span>
               </button>
@@ -29,4 +29,4 @@ class RecipeCard extends React.Component
     }
 }
 
-export default RecipeCard
+export default RecipeIcon

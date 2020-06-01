@@ -23,6 +23,7 @@ class MenuMaker extends React.Component {
             }
 
         };
+        this.props.handler(this.props.day, this.props.recipes)
     }
 
     handleChange(number, items)
@@ -56,23 +57,17 @@ class MenuMaker extends React.Component {
     {
         return (
             <>
-
-
-                    <div className="d-flex flex-column" style={{ height: "100%", padding: "20px" }}>
+                    <div className="d-flex flex-column" style={{ height: "100vh", padding: "20px" }}>
                         <div className="row"  style={{ height: "50%" }}>
-                            <DropList name="Breakfast" mealNumber="1" handler={this.handleChange} calorieCounter={this.calorieCounter} />
+                            <DropList name="Breakfast" mealNumber="1" editable={this.props.editable} recipes = {this.props.recipes} handler={this.handleChange} calorieCounter={this.calorieCounter} />
                         </div>
                         <div className="row" style={{ height: "50%" }}>
-                            <DropList name="Lunch" mealNumber="2" handler={this.handleChange} calorieCounter={this.calorieCounter}/>
+                            <DropList name="Lunch" mealNumber="2"  editable={this.props.editable} recipes = {this.props.recipes} handler={this.handleChange} calorieCounter={this.calorieCounter}/>
                         </div>
                         <div className="row" style={{ height: "50%" }}>
-                            <DropList name="Dinner" mealNumber="3" handler={this.handleChange} calorieCounter={this.calorieCounter}/>
-                        </div>
-                        <div className="row" style={{ height: "50%" }}>
-                            <p className="float-right">{this.getAllCalories()} calories total</p>
+                            <DropList name="Dinner" mealNumber="3"  editable={this.props.editable} recipes = {this.props.recipes} handler={this.handleChange} calorieCounter={this.calorieCounter}/>
                         </div>
                     </div>
-
             </>
         );
     }

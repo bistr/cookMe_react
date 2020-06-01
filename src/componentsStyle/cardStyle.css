@@ -46,6 +46,15 @@
     }
 }
 
+/* @media (min-width: 800px)
+{
+    .recipe-card-deck
+    {
+        column-count: 4;
+        webkit-column-count:4;
+    }
+} */
+
 
 .equipment-card-deck
 {
@@ -68,6 +77,7 @@
 .rating-icon
 {
         max-width: 5vw;
+        width:20%;
 }
 
 .rating-text

@@ -19,7 +19,7 @@ class DragList extends React.Component {
             <div className="drag-drop-container flex-grow list-group">
                 {this.props.items.map(item => (
                     <Drag key={item.id} dataItem={JSON.stringify(item)}>
-                        <RecipeIcon recipe={item}/>
+                        <RecipeIcon recipe={item} closeable={false}/>
                     </Drag>
                 ))}
             </div>

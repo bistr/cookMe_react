@@ -8,7 +8,7 @@ class RecipeColumns extends React.Component
     {
         const {recipes} = this.props;
         return (
-          <div className="card-columns">
+          <div className={"card-columns " + this.props.className}>
             {recipes.map((recipe) => (
                 <RecipeCard key={recipe.id} recipe={recipe}/>
             ))}

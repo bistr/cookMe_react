@@ -57,7 +57,7 @@ class RecipePage extends React.Component
     fetchCollections(id)
     {
         //let fakeURL = 'https://5e7ce6e0a917d700166840b4.mockapi.io/postsByRecipe/'+recipeId
-        let realURL = "https://cook-me.herokuapp.com/users/"+this.state.user_id+"/collections_without/"+id;
+        let realURL = "https://cook-me.herokuapp.com/users/"+this.state.user_id+"/collections"//_without/"+id;
         fetch(realURL)
         .then(res => res.json())
         .then((data) => {

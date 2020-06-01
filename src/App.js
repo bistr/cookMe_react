@@ -18,7 +18,7 @@ class App extends Component {
       }
 
     componentDidMount() {
-        let realURL = 'https://cook-me.herokuapp.com/recipes'
+        let realURL = 'https://cook-me.herokuapp.com/allrecipes'
         fetch(realURL)
         .then(res => res.json())
         .then((data) => {

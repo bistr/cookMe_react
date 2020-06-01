@@ -25,11 +25,9 @@ class DietaryPreferencesInput extends React.Component
     render()
     {
         let checkboxes = this.preferences.map(preference =>
-            <div className="form-check-inline" key={preference}>
-            <input className="form-check-input" type="checkbox" name={preference} value={true} onChange={(e)=>this.changeValue(e)}/>
-            <label className="form-check-label" htmlFor={preference}>
-              {preference}
-            </label>
+            <div class="custom-control custom-checkbox dropdown-item mx-1 w-100" key={preference}>
+                <input type="checkbox" class="custom-control-input" id={preference} name={preference} value={true} onChange={(e)=>this.changeValue(e)}/>
+                <label class="custom-control-label" htmlFor={preference}>{preference}</label>
             </div>
         );
         return(
