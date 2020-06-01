@@ -94,7 +94,7 @@ class ProfilePage extends React.Component {
             }
             description = "" / >
             </div>
-            <div class = "row" > { //Check if message failed
+            <div class = "row justify-content-center flex-column" > { //Check if message failed
                 (this.state.user_id == this.state.profile_id) ?
                 < button class = "btn btn-primary" onClick = {this.handleClick} > Update Equipment < /button> :
                     < > < />

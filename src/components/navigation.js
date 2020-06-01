@@ -45,10 +45,10 @@ class Navigation extends React.Component
                     (this.state.user_id!="")?
                     <>
                     <li className = "nav-item">
-                      <Link to="/upload" className="nav-link float-left">Upload a Recipe</Link>
+                      <Link to="/upload" className="nav-link float-left">Upload Recipe</Link>
                     </li>
                     <li className = "nav-item">
-                      <Link to="/create-menu" className="nav-link float-left">Create a Menu</Link>
+                      <Link to="/create-menu" className="nav-link float-left">Create Menu</Link>
                     </li>
 
                 <li className = "nav-item float-right">

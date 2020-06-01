@@ -69,10 +69,10 @@ class LoginForm extends React.Component
             <form onSubmit={this.handleSubmit} className="w-75">
 
                 <label htmlFor="username">Which user are you?</label>
-                <input id="username" type="text" required className="form-control" placeholder="Username"  />
+                <input id="username" className="form-input my-3" type="text" required className="form-control" placeholder="Username"  />
                 <label htmlFor="password">Password</label>
-                <input id="password" type="password" required className="form-control" placeholder="Password"  />
-                <button onClick={(e)=>this.handleSubmit(e)}>Submit</button>
+                <input id="password" className="form-input my-3" type="password" required className="form-control" placeholder="Password"  />
+                <button className="btn btn-primary my-3" onClick={(e)=>this.handleSubmit(e)}>Submit</button>
         </form>
         )
     }

@@ -82,14 +82,14 @@ class RegisterForm extends React.Component
         return(
             <form onSubmit={this.handleSubmit} className="w-75">
 
-                <SingleInput name="username" required="true" handler={this.handleComponentChange}/>
-                <SingleInput name="password" required="true" type="password" handler={this.handleComponentChange}/>
-                <SingleInput name="real_name" handler={this.handleComponentChange}/>
-                <SingleInput name="bio" handler={this.handleComponentChange} />
-                <SingleInput name="photo" handler={this.handleComponentChange} />
+                <label> Username </label> <SingleInput name="username" required="true" handler={this.handleComponentChange}/>
+                <label> Password </label><SingleInput name="password" required="true" type="password" handler={this.handleComponentChange}/>
+                <label> Real name </label><SingleInput name="real_name" handler={this.handleComponentChange}/>
+                <label> Bio </label><SingleInput name="bio" handler={this.handleComponentChange} />
+                <label> Photo </label><SingleInput name="photo" handler={this.handleComponentChange} />
 
 
-                <input type="submit" onClick={(e)=>this.handleSubmit(e)}/>
+                <button type="submit" className="btn btn-primary" onClick={(e)=>this.handleSubmit(e)}>Register</button>
         </form>
         )
     }

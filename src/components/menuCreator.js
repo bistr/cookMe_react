@@ -137,7 +137,9 @@ class MenuCreator extends React.Component {
         <div className="col-2">
         <RecipeListGroup items={this.state.selected} handler={this.removeItem} editable={true}/>
         <SingleInput name="name" placeholder="Menu Name" handler={this.onInput} />
-        <button className="btn btn-primary" onClick={this.submitHandler}>Create Menu</button>
+        <button className="btn btn-primary my-2" onClick={this.submitHandler}>Create Menu</button>
+        <button className="btn btn-success my-2">Suggest Menu</button>
+
         </div>
 
 
