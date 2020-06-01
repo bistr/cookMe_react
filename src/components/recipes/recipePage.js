@@ -104,6 +104,7 @@ class RecipePage extends React.Component
                         <>
                         <button className="btn btn-success flex-shrink mx-2 rounded-lg" name="postModal" onClick={()=>this.toggleModal("postModal")}> I cooked this! </button>
                         <button className= "btn btn-info flex-shrink mx-2 rounded-lg" name="addModal" onClick={()=>this.toggleModal("addModal")}> Add to collection </button>
+                        <button className="btn btn-success flex-shrink mx-2 rounded-lg"> Share </button>
                         </>:
                         <>
                         </>

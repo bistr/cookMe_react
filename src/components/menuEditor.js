@@ -83,13 +83,11 @@ class MenuEditor extends React.Component {
     submitHandler()
     {
         let requestBody = {
-            "user_id":this.state.user_id,
-            "length":7,
             "days":this.state.days,
-            "name":"test"
+            "menu_id":this.state.menu_id
         }
         console.log(JSON.stringify(requestBody));
-        fetch('https://cook-me.herokuapp.com/upload-menu', {
+        fetch('https://cook-me.herokuapp.com/upload-menu-recipes', {
           method: 'POST',// or 'PUT'
           headers: {
             'Content-Type': 'application/json',
@@ -98,7 +96,7 @@ class MenuEditor extends React.Component {
         })
         .then((response) => response.json())
         .then((data) => {
-          console.log(data);
+          window.open("/menuviewer/"+data.id)
         })
         .catch((error) => {
           console.error('Error:', error);
