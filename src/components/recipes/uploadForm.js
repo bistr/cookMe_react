@@ -5,6 +5,7 @@ import DietaryPreferencesInput from "../dietaryPreferencesInput"
 import EquipmentIcons from "../equipment/equipmentIcons"
 import UserProfile from "../userProfile"
 import RatingIcons from "./ratingIcons"
+import Alert from "../alert"
 
 class UploadForm extends React.Component
 {
@@ -18,7 +19,7 @@ class UploadForm extends React.Component
             steps:[],
             equipment:{"grater":0, "grill":0, "microwave":0,"mixer":0,"pan":0,"pot":0,"stove":0,"toaster":0},
             user_id:UserProfile.getName(),
-            error:0,
+            errors:[],
             missing:[],
             vegan:false,
             "gluten-free":false,
@@ -137,34 +138,33 @@ class UploadForm extends React.Component
     validateForm()
     {
         let missing = [];
-        let required = ["name", "photo", "ingredients", "time", "difficulty", "price"]
-        required.forEach((field)=>{
-            if (!(field in this.state))
-            {
-                missing.push(field);
-            }
-            else if (this.state[field].length === 0)
-            {
-                missing.push(field);
-            }
-        });
+
+
         this.setState({"missing":missing});
         return missing;
 
     }
 
 
-
-
-
+    validateForm()
+    {
+        let newErrors = [];
+        let required = ["name", "photo", "ingredients", "time", "difficulty", "price"];
+        required.forEach((field)=>{
+            if (!(field in this.state) || this.state[field].length === 0)
+            {
+                newErrors.push("Fill out "+field+". ");
+            }
+        });
+        this.setState({"errors":newErrors});
+    }
 
     handleSubmit(e)
     {
         e.preventDefault();
-        let missing = this.validateForm()
-        if (missing.length!==0)
+        this.validateForm()
+        if (this.state.errors.length!==0)
         {
-            this.setState({"error":1});
             return;
         }
         this.collectInfo()
@@ -191,8 +191,6 @@ class UploadForm extends React.Component
 
     render()
     {
-        let errorMessage =""
-        this.state.missing.forEach((field)=>{errorMessage=errorMessage.concat("Fill "+field+".\n")});
 
         return(
             <div className="d-flex flex-column text-center m-2">
@@ -221,11 +219,7 @@ class UploadForm extends React.Component
             <div className="row mt-3 justify-content-center align-items-center">
                 <RatingIcons name="price" handler={this.handleComponentChange}/>
             </div>
-            {
-                (this.state.error===1)?(<div class="alert alert-danger mt-3" role="alert">
-  <strong>Oops! </strong> {errorMessage}
-</div>):(<></>)
-            }
+            <Alert errors={this.state.errors} />
 
 
             <button type="submit" className="btn btn-info btn-block my-4" onClick={this.handleSubmit}>Submit</button>

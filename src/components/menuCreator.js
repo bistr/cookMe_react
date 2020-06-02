@@ -6,6 +6,7 @@ import RecipeCard from "./recipes/recipeCard"
 import RecipeListGroup from "./recipeListGroup"
 import SingleInput from "./genericInputs/singleInput"
 import UserProfile from "./userProfile"
+import Alert from "./alert"
 
 
 
@@ -19,10 +20,12 @@ class MenuCreator extends React.Component {
           this.removeItem = this.removeItem.bind(this);
           this.onInput = this.onInput.bind(this);
           this.submitHandler = this.submitHandler.bind(this);
+          this.validateForm = this.validateForm.bind(this);
           this.state = {
               recipes: [],
               selected:[],
-              user_id:UserProfile.getName()
+              user_id:UserProfile.getName(),
+              errors:[]
             }
 
             let realURL = 'https://cook-me.herokuapp.com/allrecipes'
@@ -53,8 +56,29 @@ class MenuCreator extends React.Component {
         });
     }
 
+    validateForm()
+    {
+        let newErrors = [];
+
+        if (this.state.selected.length === 0)
+        {
+            newErrors.push("Choose at least one recipe. ");
+        }
+        if (!("name" in this.state) || (this.state.name === ""))
+        {
+            newErrors.push("Choose a name for your menu. ");
+        }
+        this.setState({"errors":newErrors});
+    }
+
+
     submitHandler()
     {
+        this.validateForm();
+        if (this.state.errors.length !== 0)
+        {
+            return;
+        }
         let days = {}
         days["0"]={}
         days["0"]["0"] = this.state.selected.map(item=>item.id);
@@ -122,13 +146,14 @@ class MenuCreator extends React.Component {
     {
       return null;
     }
+
     return (
         <>
         <div class="row">
-        <Filters className="col-3" handler={this.handleFilter}/>
-        {(this.state.recipes.length>0)?(<></>):<div class="alert alert-light" role="alert">
-      <strong>No results!</strong> You need to change your search parameters.
-  </div>}
+            <Filters className="col-3" handler={this.handleFilter}/>
+            {(this.state.recipes.length>0)?(<></>):<div class="alert alert-light" role="alert">
+                <strong>No results!</strong> You need to change your search parameters.
+                </div>}
         <RecipeColumns className="recipe-card-deck col-7">
         {this.state.recipes.map((recipe) => (
             <RecipeCard key={recipe.id} recipe={recipe} handler={this.selectCard}/>
@@ -137,6 +162,7 @@ class MenuCreator extends React.Component {
         <div className="col-2">
         <RecipeListGroup items={this.state.selected} handler={this.removeItem} editable={true}/>
         <SingleInput name="name" placeholder="Menu Name" handler={this.onInput} />
+        <Alert errors={this.state.errors} />
         <button className="btn btn-primary my-2" onClick={this.submitHandler}>Create Menu</button>
         <button className="btn btn-success my-2">Suggest Menu</button>
 
