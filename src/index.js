@@ -17,7 +17,7 @@ import MenuDisplayer from "./components/menuDisplayer"
 import MenuEditor from "./components/menuEditor"
 import MenuCreator from "./components/menuCreator"
 import Search from "./components/search"
-import UploadForm from "./components/uploadForm"
+import UploadForm from "./components/recipes/uploadForm"
 import * as serviceWorker from './serviceWorker';
 
 const routing = (
@@ -39,7 +39,7 @@ const routing = (
         <Route path = "/menumaker/:id" component = {MenuEditor} />
         <Route path = "/menuviewer/:id" component = {MenuDisplayer} />
         <Route path = "/create-menu" component = {MenuCreator} />
-        <Route path = "/test" component = {<></>} />
+
       </Switch>
       </div>
 

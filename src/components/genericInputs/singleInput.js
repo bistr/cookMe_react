@@ -49,14 +49,10 @@ class SingleInput extends React.Component
             requiredFlag = true;
         }
 
-        if ("close" in this.props)
+        if ("textarea" in this.props)
         {
-            className = className.concat(" w-auto d-inline col-lg-8 col-10");
             return(
-                <div className="d-flex w-100 justify-content-center align-items-center">
-                <textarea className={className} type = {type} placeholder={placeholder} rows="1" onChange={(e)=>this.changeValue(e)}/>
-                {closeButton}
-                </div>
+                <textarea className={className} type = {type} placeholder={placeholder} rows="3" onChange={(e)=>this.changeValue(e)}/>
             )
         }
         return(

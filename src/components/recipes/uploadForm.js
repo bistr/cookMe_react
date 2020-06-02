@@ -1,12 +1,12 @@
 import React from 'react'
-import GenericForm from "./genericForm"
-import SingleInput from "./genericInputs/singleInput"
-import DynamicInputs from "./genericInputs/dynamicInputs"
-import DietaryPreferencesInput from "./dietaryPreferencesInput"
-import EquipmentIcons from "./equipment/equipmentIcons"
-import UserProfile from "./userProfile"
-import RatingIcons from "./recipes/ratingIcons"
-import Utilities from "./utilities"
+import GenericForm from "../genericForm"
+import SingleInput from "../genericInputs/singleInput"
+import DynamicInputs from "../genericInputs/dynamicInputs"
+import DietaryPreferencesInput from "../dietaryPreferencesInput"
+import EquipmentIcons from "../equipment/equipmentIcons"
+import UserProfile from "../userProfile"
+import RatingIcons from "./ratingIcons"
+import Utilities from "../utilities"
 
 
 class UploadForm extends React.Component

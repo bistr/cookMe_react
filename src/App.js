@@ -9,13 +9,12 @@ import Utilities from "./components/utilities"
 
 
 class App extends Component {
-    state = {
-        recipes: []
-      }
 
       constructor(props)
       {
-          super(props)
+          super(props);
+          this.state = {
+            }
           Utilities.sendRequestGet('https://cook-me.herokuapp.com/allrecipes')
           .then((data) => {
             this.setState({ recipes: data })
@@ -25,7 +24,7 @@ class App extends Component {
 
 
   render() {
-    if (this.state.recipes === [])
+    if (!this.state.recipes)
     {
       return null;
     }
