@@ -73,37 +73,25 @@ class RatingIcons extends React.Component
             let imgSource = `${process.env.PUBLIC_URL}/images/${this.props.name}.png`;
             let secondImgSource = `${process.env.PUBLIC_URL}/images/${this.props.name}Color.png`;
             return(
-                <>
+                <div class="row w-100 justify-content-center my-1">
                 <label class="text-capitalize text-dark mx-4 w-60 rating-text">{this.props.name}</label>
-                <img className="rating-icon" src={(this.props.info<1)?imgSource:secondImgSource} alt="rating1" id={this.props.name+"1"}/>
-                <img className="rating-icon" src={(this.props.info<2)?imgSource:secondImgSource} alt="rating2" id={this.props.name+"2"}/>
-                <img className="rating-icon" src={(this.props.info<3)?imgSource:secondImgSource} alt="rating3" id={this.props.name+"3"}/>
-                </>
+                <img className="rating-icon m-1" src={(this.props.info<1)?imgSource:secondImgSource} alt="rating1" id={this.props.name+"1"}/>
+                <img className="rating-icon m-1" src={(this.props.info<2)?imgSource:secondImgSource} alt="rating2" id={this.props.name+"2"}/>
+                <img className="rating-icon m-1" src={(this.props.info<3)?imgSource:secondImgSource} alt="rating3" id={this.props.name+"3"}/>
+                </div>
             )
 
         }
-        // const tools = ["grater", "grill", "microwave","mixer","pan","pot","stove","toaster"];
-        // return(
-        //     <>
-        //     <div class="row my-3 justify-content-center">
-        //         <div className="card-deck mx-5 ">
-        //           {tools.map((tool) => (
-        //               <EquipmentCard name={tool} handler={this.handleCardClick}/>
-        //           ))}
-        //         </div>
-        //     </div>
-        // </>
-        // )
 
         let imgSource = `${process.env.PUBLIC_URL}/images/${this.props.name}.png`;
 
         return(
-            <>
+            <div class="row w-100 justify-content-center my-1">
             <label class="text-capitalize text-dark mx-4 w-60 rating-text">{this.props.name}</label>
             <img className="rating-icon" onMouseOver={this.hoverHandler} onClick={this.clickHandler} alt="rating1" onMouseLeave={this.leaveHandler} src={imgSource} id={this.props.name+"1"}/>
             <img className="rating-icon" onMouseOver={this.hoverHandler} onClick={this.clickHandler} alt="rating2" onMouseLeave={this.leaveHandler} src={imgSource} id={this.props.name+"2"}/>
             <img className="rating-icon" onMouseOver={this.hoverHandler} onClick={this.clickHandler} alt="rating3" onMouseLeave={this.leaveHandler} src={imgSource} id={this.props.name+"3"}/>
-            </>
+            </div>
         )
     }
  }

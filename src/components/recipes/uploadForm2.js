@@ -135,16 +135,6 @@ class UploadForm extends React.Component
         return promise;
     }
 
-    validateForm()
-    {
-        let missing = [];
-
-
-        this.setState({"missing":missing});
-        return missing;
-
-    }
-
 
     validateForm()
     {
