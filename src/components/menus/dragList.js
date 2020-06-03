@@ -1,6 +1,6 @@
 import React from "react";
 import Drag from "./drag";
-import RecipeIcon from "./recipes/recipeIcon"
+import RecipeIcon from "../recipes/recipeIcon"
 
 class DragList extends React.Component {
     constructor(props)

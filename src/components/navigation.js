@@ -1,5 +1,5 @@
 import React from 'react'
-import UserProfile from "./userProfile"
+import UserProfile from "./authentication/userProfile"
 import { Route, Link, BrowserRouter as Router, Switch } from 'react-router-dom'
 
 class Navigation extends React.Component

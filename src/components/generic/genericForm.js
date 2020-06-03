@@ -1,6 +1,6 @@
 import React from 'react'
 import Alert from "./alert"
-import UserProfile from "./userProfile"
+import UserProfile from "../authentication/userProfile"
 
 class GenericForm extends React.Component
 {

@@ -1,6 +1,6 @@
 import React from "react";
 import DropTarget from "./dropTarget";
-import RecipeIcon from "./recipes/recipeIcon"
+import RecipeIcon from "../recipes/recipeIcon"
 
 class DropList extends React.Component {
     constructor(props)

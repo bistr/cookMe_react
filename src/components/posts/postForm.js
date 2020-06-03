@@ -1,8 +1,8 @@
 import React from 'react'
-import SingleInput from "../genericInputs/singleInput"
-import UserProfile from "../userProfile"
-import GenericForm from "../genericForm"
-import Utilities from "../utilities"
+import SingleInput from "../generic/singleInput"
+import UserProfile from "../authentication/userProfile"
+import GenericForm from "../generic/genericForm"
+import Utilities from "../generic/utilities"
 import "../../index.css"
 
 

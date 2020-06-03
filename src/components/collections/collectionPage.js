@@ -1,14 +1,13 @@
-
 import React, {Component} from 'react';
 import RecipeColumns from '../recipes/recipeColumns';
-
+import RecipeCard from "../recipes/recipeCard"
 
 class CollectionPage extends Component {
 
       constructor(props)
       {
           super(props);
-          this.state = {recipes: []};
+          this.state = {};
           this.makeItShow=this.makeItShow.bind(this)
           this.fetchRecipes = this.fetchRecipes.bind(this);
           let collectionID = this.props.match.params.id;
@@ -20,7 +19,8 @@ class CollectionPage extends Component {
         fetch(realURL)
         .then(res => res.json())
         .then((data) => {
-          this.setState({ recipes: data["recipes"] })
+          this.setState(data);
+          console.log(data);
         })
         .catch(console.log)
     }
@@ -31,10 +31,11 @@ class CollectionPage extends Component {
   }
 
   render() {
-    if (this.state.recipes == [])
+    if (!this.state.recipes)
     {
       return null;
     }
+    console.log(this.state.recipes);
     return (
     <>
     <div class="input-group my-1">
@@ -65,7 +66,9 @@ class CollectionPage extends Component {
       </div>
       <input type="text" class="form-control" placeholder="What are you looking for?" aria-label="Text input with dropdown button"/>
     </div>
-      <RecipeColumns recipes = {this.state.recipes}/>
+      <RecipeColumns>
+        {this.state.recipes.map((recipe)=><RecipeCard recipe={recipe} />)}
+      </RecipeColumns>
       </>
     );
   }

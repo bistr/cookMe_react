@@ -2,7 +2,7 @@
 import React from 'react';
 import RecipeColumns from './recipes/recipeColumns';
 import RatingIcons from "./recipes/ratingIcons"
-import DietaryPreferencesInput from "./dietaryPreferencesInput"
+import DietaryPreferencesInput from "./recipes/dietaryPreferencesInput"
 
 
 

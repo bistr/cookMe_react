@@ -1,6 +1,5 @@
 import React from 'react'
 import UserProfile from './userProfile';
-import { sha256 } from 'js-sha256';
 
 class LoginForm extends React.Component
 {

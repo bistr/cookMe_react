@@ -1,25 +1,26 @@
 import React from 'react'
-import UserProfile from "./userProfile"
+import UserProfile from "../authentication/userProfile"
 import DragList from "./dragList";
 import DropList from "./dropList";
 import MenuMaker from "./menuMaker"
+import NutritionalInfo from "../recipes/nutritionalInfo"
 
 
-class MenuEditor extends React.Component {
+class MenuViewer extends React.Component {
     constructor(props) {
         super(props);
         let current_user_id = UserProfile.getName();
-        this.fetchRecipes = this.fetchRecipes.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.dayChangeHandler = this.dayChangeHandler.bind(this);
-        this.fetchMenu = this.fetchMenu.bind(this)
-        this.submitHandler = this.submitHandler.bind(this);
+        this.fetchMenu = this.fetchMenu.bind(this);
+        this.getAllNutrientInfo = this.getAllNutrientInfo.bind(this);
         this.state = {
             recipes: [],
             user_id: current_user_id,
             days:{},
             menu:null,
-            menu_id:this.props.match.params.id
+            menu_id:this.props.match.params.id,
+            nutrientInfo:{}
         };
         this.fetchMenu(this.state.menu_id);
     }
@@ -35,17 +36,8 @@ class MenuEditor extends React.Component {
                     menu: data
                 }, () => console.log(this.state))
             })
-            .catch(console.log)
-    }
-
-    fetchRecipes(id) {
-        let realURL = 'https://cook-me.herokuapp.com/users/' + id + '/recipes';
-        fetch(realURL)
-            .then(res => res.json())
-            .then((data) => {
-                this.setState({
-                    recipes: data
-                }, () => console.log(this.state))
+            .then(()=>{
+                this.setState({"nutrientInfo":this.getAllNutrientInfo("1")})
             })
             .catch(console.log)
     }
@@ -71,37 +63,44 @@ class MenuEditor extends React.Component {
         else {
             document.getElementById("menumaker"+day).style.display = 'none';
         }
+        this.setState({"nutrientInfo":this.getAllNutrientInfo(day)})
     }
 
     handleChange(day, item)
     {
-        let currentDays = this.state.days;
-        currentDays[day] = item;
-        this.setState({ "days": currentDays}, ()=>{console.log(this.state)});
     }
 
-    submitHandler()
+
+    getAllNutrientInfo(day)
     {
-        let requestBody = {
-            "days":this.state.days,
-            "menu_id":this.state.menu_id
+        let result = {"Sugar":0, "Salt":0, "Fat":0, "Calories":0, "Protein":0};
+        if(!this.state.menu.recipes)
+        {
+            return result;
         }
-        console.log(JSON.stringify(requestBody));
-        fetch('https://cook-me.herokuapp.com/upload-menu-recipes', {
-          method: 'POST',// or 'PUT'
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(requestBody),
-        })
-        .then((response) => response.json())
-        .then((data) => {
-          window.open("/menus/"+data.id)
-        })
-        .catch((error) => {
-          console.error('Error:', error);
+        if(!this.state.menu.recipes[day])
+        {
+            return result;
+        }
+        ["1","2","3"].forEach((meal) => {
+            if(!this.state.menu.recipes[day][meal])
+            {
+                return;
+            }
+            this.state.menu.recipes[day][meal].forEach((recipe) => {
+                result["Sugar"]+=recipe.nutrientInfo["Sugar"]
+                result["Salt"]+=recipe.nutrientInfo["Salt"]
+                result["Protein"]+=recipe.nutrientInfo["Protein"]
+                result["Fat"]+=recipe.nutrientInfo["Fat"]
+                result["Calories"]+=recipe.nutrientInfo["Calories"]
+            });
         });
+        return result;
+
+
     }
+
+
 
     render()
     {
@@ -123,37 +122,36 @@ class MenuEditor extends React.Component {
                 <button type="button" id="5" className="btn btn-outline-primary my-1" onClick={this.dayChangeHandler}>5</button>
                 <button type="button" id="6" className="btn btn-outline-primary my-1" onClick={this.dayChangeHandler}>6</button>
                 <button type="button" id="7" className="btn btn-outline-primary my-1" onClick={this.dayChangeHandler}>7</button>
-                <button type="button" class="btn btn-success" onClick={this.submitHandler}>Submit</button>
+
             </div>
 
             </div>
-            <div className="col-6" style={{ height: "100%", padding: "20px" }}>
-                <h2>Recipes</h2>
-                <DragList items={this.state.menu.recipe_list}/>
+            <div className="col-8" id="menumaker1">
+                <MenuMaker day="1" recipes={this.state.menu.recipes["1"]} handler={this.handleChange}/>
+            </div>
+            <div className="col-8"  id="menumaker2">
+                <MenuMaker day="2" recipes={this.state.menu.recipes["2"]} handler={this.handleChange}/>
+            </div>
+            <div className="col-8" id="menumaker3">
+                <MenuMaker day="3" recipes={this.state.menu.recipes["3"]} handler={this.handleChange}/>
+            </div>
+            <div className="col-8" id="menumaker4">
+                <MenuMaker day="4" recipes={this.state.menu.recipes["4"]} handler={this.handleChange}/>
+            </div>
+            <div className="col-8" id="menumaker5">
+                <MenuMaker day="5" recipes={this.state.menu.recipes["5"]} handler={this.handleChange}/>
+            </div>
+            <div className="col-8" id="menumaker6">
+                <MenuMaker day="6" recipes={this.state.menu.recipes["6"]} handler={this.handleChange}/>
+            </div>
+            <div className="col-8" id="menumaker7">
+                <MenuMaker day="7" recipes={this.state.menu.recipes["7"]} handler={this.handleChange}/>
+            </div>
+            <div className="col-3 float-right">
+            <NutritionalInfo info={this.state.nutrientInfo}/>
+            </div>
             </div>
 
-            <div className="col-5" id="menumaker1">
-                <MenuMaker day="1" recipes={this.state.menu.recipes["1"]} editable={true} handler={this.handleChange}/>
-            </div>
-            <div className="col-5"  id="menumaker2">
-                <MenuMaker day="2" recipes={this.state.menu.recipes["2"]} editable={true} handler={this.handleChange}/>
-            </div>
-            <div className="col-5" id="menumaker3">
-                <MenuMaker day="3" recipes={this.state.menu.recipes["3"]} editable={true} handler={this.handleChange}/>
-            </div>
-            <div className="col-5" id="menumaker4">
-                <MenuMaker day="4" recipes={this.state.menu.recipes["4"]} editable={true} handler={this.handleChange}/>
-            </div>
-            <div className="col-5" id="menumaker5">
-                <MenuMaker day="5" recipes={this.state.menu.recipes["5"]} editable={true} handler={this.handleChange}/>
-            </div>
-            <div className="col-5" id="menumaker6">
-                <MenuMaker day="6" recipes={this.state.menu.recipes["6"]} editable={true} handler={this.handleChange}/>
-            </div>
-            <div className="col-5" id="menumaker7">
-                <MenuMaker day="7" recipes={this.state.menu.recipes["7"]} editable={true} handler={this.handleChange}/>
-            </div>
-            </div>
             </>
         );
     }
@@ -161,4 +159,4 @@ class MenuEditor extends React.Component {
 
 }
 
-export default MenuEditor
+export default MenuViewer

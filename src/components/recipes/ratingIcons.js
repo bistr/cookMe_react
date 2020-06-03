@@ -1,5 +1,5 @@
 import React from 'react'
-import UserProfile from "../userProfile"
+import UserProfile from "../authentication/userProfile"
 import "../../componentsStyle/cardStyle.css"
 
 class RatingIcons extends React.Component

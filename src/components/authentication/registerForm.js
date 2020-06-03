@@ -1,5 +1,5 @@
 import React from 'react'
-import SingleInput from "./genericInputs/singleInput"
+import SingleInput from "../generic/singleInput"
 import UserProfile from "./userProfile"
 
 class RegisterForm extends React.Component

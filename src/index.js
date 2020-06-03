@@ -4,18 +4,17 @@ import './index.css';
 import App from './App';
 import { Route, Link, BrowserRouter as Router, Switch } from 'react-router-dom'
 import RecipePage from "./components/recipes/recipePage"
-import RegisterForm from "./components/registerForm"
-import LoginForm from "./components/loginForm"
-// import UploadForm from "./components/recipes/uploadForm"
+import RegisterForm from "./components/authentication/registerForm"
+import LoginForm from "./components/authentication/loginForm"
 import PostPage from "./components/posts/postPage"
 import PostForm from "./components/posts/postForm"
 import ProfilePage from "./components/profilePage"
 import Navigation from "./components/navigation"
 import CollectionPage from "./components/collections/collectionPage"
 import EquipmentForm from "./components/equipment/equipmentForm"
-import MenuViewer from "./components/menuViewer"
-import MenuEditor from "./components/menuEditor"
-import MenuCreator from "./components/menuCreator"
+import MenuViewer from "./components/menus/menuViewer"
+import MenuEditor from "./components/menus/menuEditor"
+import MenuCreator from "./components/menus/menuCreator"
 import Search from "./components/search"
 import UploadForm from "./components/recipes/uploadForm"
 import * as serviceWorker from './serviceWorker';

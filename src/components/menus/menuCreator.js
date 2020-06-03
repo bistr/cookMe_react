@@ -1,12 +1,12 @@
 
 import React from 'react';
-import RecipeColumns from './recipes/recipeColumns';
-import Filters from "./filters"
-import RecipeCard from "./recipes/recipeCard"
+import RecipeColumns from '../recipes/recipeColumns';
+import Filters from "../filters"
+import RecipeCard from "../recipes/recipeCard"
 import RecipeListGroup from "./recipeListGroup"
-import SingleInput from "./genericInputs/singleInput"
-import UserProfile from "./userProfile"
-import Alert from "./alert"
+import SingleInput from "../generic/singleInput"
+import UserProfile from "../authentication/userProfile"
+import Alert from "../generic/alert"
 
 
 

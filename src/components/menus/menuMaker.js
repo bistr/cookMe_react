@@ -1,5 +1,5 @@
 import React from 'react'
-import UserProfile from "./userProfile"
+import UserProfile from "../authentication/userProfile"
 import DragList from "./dragList";
 import DropList from "./dropList";
 

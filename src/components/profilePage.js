@@ -1,7 +1,7 @@
 import React from 'react'
 import CardList from "./cardList"
 import AuthorInfo from "./authorInfo"
-import UserProfile from "./userProfile"
+import UserProfile from "./authentication/userProfile"
 class ProfilePage extends React.Component {
     constructor(props) {
         super(props);

@@ -1,5 +1,5 @@
 import React from 'react'
-import RecipeIcon from "./recipes/recipeIcon"
+import RecipeIcon from "../recipes/recipeIcon"
 
 
 class RecipeListGroup extends React.Component

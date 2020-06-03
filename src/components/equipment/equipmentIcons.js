@@ -1,6 +1,6 @@
 import React from 'react'
 import EquipmentCard from "./equipmentCard"
-import UserProfile from "../userProfile"
+import UserProfile from "../authentication/userProfile"
 
 class EquipmentIcons extends React.Component
 {

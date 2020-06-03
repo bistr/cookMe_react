@@ -4,7 +4,7 @@ import RecipeColumns from './components/recipes/recipeColumns';
 import "./index.css"
 import "./App.css"
 import RecipeCard from "./components/recipes/recipeCard"
-import Utilities from "./components/utilities"
+import Utilities from "./components/generic/utilities"
 
 
 
@@ -29,7 +29,7 @@ class App extends Component {
       return null;
     }
     return (
-        <RecipeColumns recipes = {this.state.recipes}>
+        <RecipeColumns>
         {this.state.recipes.map((recipe) => (
             <RecipeCard key={recipe.id} recipe={recipe}/>
         ))}

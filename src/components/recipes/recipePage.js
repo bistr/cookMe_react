@@ -1,8 +1,8 @@
 import React from 'react'
-import UserProfile from '../userProfile';
+import UserProfile from "../authentication/userProfile"
 import "../../index.css"
 import IngredientsDisplay from "../ingredients/ingredientsDisplay"
-import StepsDisplay from "../stepsDisplay"
+import StepsDisplay from "./stepsDisplay"
 import ImageDisplay from "../imageDisplay"
 import NutritionalInfo from "./nutritionalInfo"
 import Modal from '../modal';
