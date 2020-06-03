@@ -2,7 +2,7 @@ var Utilities = (function() {
 
     var sendRequestPost = async function(url, data) {
         console.log(data);
-        let promise = await fetch(url, {
+        let response = fetch(url, {
                 method: 'POST', // or 'PUT'
                 headers: {
                     'Content-Type': 'application/json',
@@ -14,16 +14,15 @@ var Utilities = (function() {
             })
             .then((response) => response.json())
             .catch(error => {return {"Error":error}});
-
-        return promise;
+        return response;
     };
 
     var sendRequestGet = async function(url) {
 
-        let promise = await fetch(url)
+        let response = fetch(url)
             .then(res => res.json())
             .catch(error => {return {"Error":error}});
-        return promise;
+        return response;
     };
 
 

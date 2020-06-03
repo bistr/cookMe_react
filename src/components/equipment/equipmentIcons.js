@@ -79,11 +79,11 @@ class EquipmentIcons extends React.Component
     {
         const tools = ["grater", "grill", "microwave","mixer","pan","pot","stove","toaster"];
         return(
-            <>
+            <div className="d-flex justify-content-center">
                   {tools.map((tool) => (
                       <EquipmentCard name={tool} handler={this.handleCardClick}/>
                   ))}
-        </>
+        </div>
         )
     }
  }

@@ -1,5 +1,6 @@
 import React from 'react'
 import UserProfile from "../authentication/userProfile"
+import Utilities from "../generic/utilities"
 
 
 
@@ -21,9 +22,8 @@ class AddForm extends React.Component
     fetchCollections()
     {
         //let fakeURL = 'https://5e7ce6e0a917d700166840b4.mockapi.io/postsByRecipe/'+recipeId
-        let realURL = "https://cook-me.herokuapp.com/users/"+this.state.user_id+"/collections_without/"+this.props.recipe_id;
-        fetch(realURL)
-        .then(res => res.json())
+        let realURL = "https://cook-me.herokuapp.com/users/"+this.state.user_id+"/collections";
+        Utilities.sendRequestGet(realURL)
         .then((data) => {
          this.setState({ collections: data }, ()=>console.log(this.state))
 
@@ -50,21 +50,14 @@ class AddForm extends React.Component
             let requestBody = {
                 "collection_id":collectionID,
                 "recipe_id":this.props.recipe_id
-            }
-            fetch('https://cook-me.herokuapp.com/add_to_collection', {
-              method: 'POST',// or 'PUT'
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify(requestBody),
+            };
+            Utilities.sendRequestPost('https://cook-me.herokuapp.com/add_to_collection', requestBody)
+            .then((data) => {
+              console.log(data);
             })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log(data);
-        })
-        .catch((error) => {
-          console.error('Error:', error);
-        });
+            .catch((error) => {
+              console.error('Error:', error);
+          });
         });
         this.props.close();
 
@@ -77,14 +70,7 @@ class AddForm extends React.Component
             "name":this.state.name,
             "user_id":this.state.user_id
         }
-        fetch('https://cook-me.herokuapp.com/add_collection', {
-          method: 'POST',// or 'PUT'
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(requestBody),
-        })
-        .then((response) => response.json())
+        Utilities.sendRequestPost('https://cook-me.herokuapp.com/add_collection', requestBody)
         .then((data) => {
           this.fetchCollections(this.state.user_id);
         })

@@ -1,6 +1,7 @@
 import React from 'react'
 import EquipmentCard from "./equipmentCard"
 import UserProfile from "../authentication/userProfile"
+import Utilities from "../generic/utilities"
 
 class EquipmentForm extends React.Component
 {
@@ -25,25 +26,26 @@ class EquipmentForm extends React.Component
     fetchEquipment(id)
     {
         let realURL = 'https://cook-me.herokuapp.com/get-user-equipment/'+id;
-        fetch(realURL)
-        .then(res => res.json())
+        Utilities.sendRequestGet(realURL)
         .then((data) => {
+
             if (Object.keys(data)!==0)
             {
-                console.log(data.length);
                 this.setState({ tools: data}, ()=>console.log(this.state))
             }
+            return;
 
         })
         .then(()=>{this.colorOwnedEquipment()})
-        .catch(console.log)
+
     }
 
     colorOwnedEquipment()
     {
+        console.log(this.state)
         const tools = ["grater", "grill", "microwave","mixer","pan","pot","stove","toaster"];
         tools.forEach((tool)=>{
-            if (this.state.tools[tool] === 1)
+            if (this.state.tools[tool] === 1 || this.state.tools[tool] === true)
             {
                 document.getElementById(tool).classList.toggle("pressed");
             }
@@ -63,19 +65,8 @@ class EquipmentForm extends React.Component
     {
         event.preventDefault();
         //TODO FIXME
-        fetch('https://cook-me.herokuapp.com/update-equipment/'+this.state.user_id, {
-          method: 'POST',// or 'PUT'
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(this.state),
-        })
-        .then((response) => response.json())
+        Utilities.sendRequestPost('https://cook-me.herokuapp.com/update-equipment/'+this.state.user_id, this.state)
         .then(()=>{window.open("/profile/"+this.state.user_id)})
-        //go to profile page or something
-        // .then((data) => {
-        //   this.openRecipePage(data.id);
-        // })
         .catch((error) => {
           console.error('Error:', error);
         });
