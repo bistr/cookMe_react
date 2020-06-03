@@ -29,8 +29,8 @@ class EquipmentIcons extends React.Component
         if("equipment" in this.props)
         {
             const tools = ["grater", "grill", "microwave","mixer","pan","pot","stove","toaster"];
-            tools.map((tool)=>{
-                if (this.props.equipment[tool] == 1)
+            tools.forEach((tool)=>{
+                if (this.props.equipment[tool] === 1)
                 {
                     document.getElementById(tool).classList.toggle("pressed");
                 }
@@ -53,8 +53,8 @@ class EquipmentIcons extends React.Component
     colorOwnedEquipment()
     {
         const tools = ["grater", "grill", "microwave","mixer","pan","pot","stove","toaster"];
-        tools.map((tool)=>{
-            if (this.state.tools[tool] == 1)
+        tools.forEach((tool)=>{
+            if (this.state.tools[tool] === 1)
             {
                 document.getElementById(tool).classList.toggle("pressed");
             }

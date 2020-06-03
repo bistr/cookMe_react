@@ -60,7 +60,7 @@ class RegisterForm extends React.Component
         {
             UserProfile.setName(data["id"]);
             //redirect to profile
-            const win = window.open("/profile/"+UserProfile.getName());
+            window.open("/profile/"+UserProfile.getName());
         }
         else if(data["status"]==="Username taken"){
             alert("Username taken")

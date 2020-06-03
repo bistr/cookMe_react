@@ -28,7 +28,7 @@ class EquipmentForm extends React.Component
         fetch(realURL)
         .then(res => res.json())
         .then((data) => {
-            if (Object.keys(data)!=0)
+            if (Object.keys(data)!==0)
             {
                 console.log(data.length);
                 this.setState({ tools: data}, ()=>console.log(this.state))
@@ -42,8 +42,8 @@ class EquipmentForm extends React.Component
     colorOwnedEquipment()
     {
         const tools = ["grater", "grill", "microwave","mixer","pan","pot","stove","toaster"];
-        tools.map((tool)=>{
-            if (this.state.tools[tool] == 1)
+        tools.forEach((tool)=>{
+            if (this.state.tools[tool] === 1)
             {
                 document.getElementById(tool).classList.toggle("pressed");
             }
@@ -71,7 +71,7 @@ class EquipmentForm extends React.Component
           body: JSON.stringify(this.state),
         })
         .then((response) => response.json())
-        .then(()=>{const win = window.open("/profile/"+this.state.user_id);})
+        .then(()=>{window.open("/profile/"+this.state.user_id)})
         //go to profile page or something
         // .then((data) => {
         //   this.openRecipePage(data.id);

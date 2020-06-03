@@ -18,8 +18,6 @@ class RecipeListGroup extends React.Component
 
     render()
     {
-        const {recipe} = this.props;
-        let classString = `card-img-top ${this.props.className}`
         return (
             <div className="drag-drop-container flex-grow list-group">
                 {this.props.items.map(recipe => (

@@ -19,7 +19,6 @@ class BackToRecipeButton extends React.Component
     }
     render()
     {
-        const {recipe} = this.props;
         return (
           <button className="btn btn-primary" onClick={(e) => this.handleClick(e)}>
           <svg class="bi bi-arrow-left-short" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">

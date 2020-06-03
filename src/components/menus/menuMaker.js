@@ -1,12 +1,10 @@
 import React from 'react'
 import UserProfile from "../authentication/userProfile"
-import DragList from "./dragList";
 import DropList from "./dropList";
 
 class MenuMaker extends React.Component {
     constructor(props) {
         super(props);
-        let current_user_id = UserProfile.getName();
         this.handleChange=this.handleChange.bind(this);
         this.calorieCounter = this.calorieCounter.bind(this);
         this.getAllCalories = this.getAllCalories.bind(this);

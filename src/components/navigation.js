@@ -32,7 +32,7 @@ class Navigation extends React.Component
                   <Link to="/search" className="nav-link float-left">Search</Link>
                 </li>
                 {
-                    (this.state.user_id=="")?
+                    (this.state.user_id==="")?
                     <>
                     <li className = "nav-item float-right"><Link to="/register" className="nav-link">Register</Link></li>
                     <li className = "nav-item float-right"><Link to="/login" className="nav-link">Log In</Link></li>
@@ -42,7 +42,7 @@ class Navigation extends React.Component
                     </>
                 }
                 {
-                    (this.state.user_id!="")?
+                    (this.state.user_id!=="")?
                     <>
                     <li className = "nav-item">
                       <Link to="/upload" className="nav-link float-left">Upload Recipe</Link>

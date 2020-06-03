@@ -1,7 +1,6 @@
 import React from 'react'
 import UserProfile from "../authentication/userProfile"
 import DragList from "./dragList";
-import DropList from "./dropList";
 import MenuMaker from "./menuMaker"
 
 
@@ -64,7 +63,7 @@ class MenuEditor extends React.Component {
         this.hideAll();
         let day = event.target.id;
         let current = document.getElementById("menumaker"+day).style.display;
-        if (current == "none")
+        if (current === "none")
         {
             document.getElementById("menumaker"+day).style.display = 'block';
         }

@@ -76,12 +76,12 @@ class ProfilePage extends React.Component {
     }
 
     handleClick() {
-        const win = window.open("/equipment/");
+        window.open("/equipment/");
     }
 
     render() {
         console.log(this.state.user_id, this.state.profile_id)
-        console.log(this.state.user_id == this.state.profile_id)
+        console.log(this.state.user_id === this.state.profile_id)
         console.log(this.state.user_id === this.state.profile_id)
 
         return (
@@ -95,7 +95,7 @@ class ProfilePage extends React.Component {
             description = "" / >
             </div>
             <div class = "row justify-content-center flex-column" > { //Check if message failed
-                (this.state.user_id == this.state.profile_id) ?
+                (this.state.user_id === this.state.profile_id) ?
                 < button class = "btn btn-primary" onClick = {this.handleClick} > Update Equipment < /button> :
                     < > < />
             } </div>

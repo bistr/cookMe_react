@@ -1,5 +1,4 @@
 import React from 'react'
-import CloseButton from "../closeButton"
 
 class SingleInput extends React.Component
 {
@@ -16,11 +15,6 @@ class SingleInput extends React.Component
     }
 
     render() {
-        let closeButton = null;
-        if ("close" in this.props)
-        {
-            closeButton = <CloseButton name={this.props.name} handler={this.props.close} className="mb-2 mr-sm-2"/>;
-        }
         let placeholder = null;
 
         if("placeholder" in this.props)

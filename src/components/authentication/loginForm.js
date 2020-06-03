@@ -31,17 +31,17 @@ class LoginForm extends React.Component
         .then((response) => response.json())
         .then((data)=>
     {
-        if (data["status"]=="OK")
+        if (data["status"]==="OK")
         {
             UserProfile.setName(data["id"]);
             //redirect to profile
-            const win = window.open("/profile/"+UserProfile.getName());
+            window.open("/profile/"+UserProfile.getName());
         }
-        else if(data["status"]=="Wrong password")
+        else if(data["status"]==="Wrong password")
         {
             alert("wrong password")
         }
-        else if(data["status"]=="User doesn't exist"){
+        else if(data["status"]==="User doesn't exist"){
             alert("No such user")
         }
         else {
@@ -68,9 +68,9 @@ class LoginForm extends React.Component
             <form onSubmit={this.handleSubmit} className="w-75">
 
                 <label htmlFor="username">Which user are you?</label>
-                <input id="username" className="form-input my-3" type="text" required className="form-control" placeholder="Username"  />
+                <input id="username" className="form-input my-3" type="text" required placeholder="Username"  />
                 <label htmlFor="password">Password</label>
-                <input id="password" className="form-input my-3" type="password" required className="form-control" placeholder="Password"  />
+                <input id="password" className="form-input my-3" type="password" required placeholder="Password"  />
                 <button className="btn btn-primary my-3" onClick={(e)=>this.handleSubmit(e)}>Submit</button>
         </form>
         )
