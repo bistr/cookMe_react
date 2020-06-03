@@ -16,6 +16,7 @@ class Navigation extends React.Component
     {
         UserProfile.setName("");
         this.setState({"user_id":UserProfile.getName()})
+        window.open("/login");
     }
 
     render()

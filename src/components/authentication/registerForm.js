@@ -1,24 +1,17 @@
 import React from 'react'
-import SingleInput from "../generic/singleInput"
 import UserProfile from "./userProfile"
+import GenericForm from "../generic/genericForm"
+import SingleInput from "../generic/singleInput"
+import Utilities from "../generic/utilities"
+import Alert from "../generic/alert"
 
 class RegisterForm extends React.Component
 {
     constructor(props)
     {
         super(props);
-
-        this.state =
-        {
-            "username":"",
-            "password":"",
-            "real_name":"",
-            "bio":"",
-            "photo":""
-        };
-
+        this.state={"errors":[]};
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleComponentChange = this.handleComponentChange.bind(this);
     }
 
     handleComponentChange(nameOfField, valueOfField)
@@ -27,70 +20,43 @@ class RegisterForm extends React.Component
     }
 
 
-    handleSubmit(e)
+    handleSubmit(formInfo)
     {
-        e.preventDefault();
-        if(this.state.username === "" || this.state.password==="")
-        {
-            return;
-        }
-        // let fields = ["username", "password", "real_name", "bio", "photo"];
-        // fields.forEach((field) => {
-        //     let value = document.getElementById(field).value;
-        //     this.setState({ [field]:value});
-        // });
-
-        // let username = document.getElementById("username").value;
-        // let password = document.getElementById("password").value;
-        // let real_name = document.getElementById("real_name");
-        // let bio = document.getElementById("bio");
-        // let photo = document.getElementByIdById("photo");
-        console.log(this.state);
-        fetch('https://cook-me.herokuapp.com/register', {
-          method: 'POST',// or 'PUT'
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(this.state),
-        })
-        .then((response) => response.json())
+        this.setState({"errors":[]});
+        Utilities.sendRequestPost('https://cook-me.herokuapp.com/register',formInfo)
         .then((data)=>
         {
         if (data["status"]==="OK")
         {
             UserProfile.setName(data["id"]);
-            //redirect to profile
             window.open("/profile/"+UserProfile.getName());
         }
         else if(data["status"]==="Username taken"){
-            alert("Username taken")
+            this.setState({"errors": this.state.errors.concat("Username is already taken.")});
         }
         else {
-            alert("what happened?????")
+            this.setState({"errors": this.state.errors.concat("There was something wrong with your request. Try again later.")});
         }
     })
-        .then((data) => {
-          console.log(data);
-        })
         .catch((error) => {
-          console.error('Error:', error);
+          this.setState({"errors": this.state.errors.concat("There was something wrong with your request. Try again later.")});
         });
     }
 
     render()
     {
         return(
-            <form onSubmit={this.handleSubmit} className="w-75">
+            <>
+            <GenericForm handler={this.handleSubmit} required={["username", "password", "real_name", "bio", "photo"]}>
+                <SingleInput name="username"/>
+                <SingleInput name="password" type="password"/>
+                <SingleInput name="real_name" placeholder="Real name"/>
+                <SingleInput name="bio" />
+                <SingleInput name="photo"/>
+            </GenericForm>
+            <Alert errors={this.state.errors} />
+            </>
 
-                <label> Username </label> <SingleInput name="username" required="true" handler={this.handleComponentChange}/>
-                <label> Password </label><SingleInput name="password" required="true" type="password" handler={this.handleComponentChange}/>
-                <label> Real name </label><SingleInput name="real_name" handler={this.handleComponentChange}/>
-                <label> Bio </label><SingleInput name="bio" handler={this.handleComponentChange} />
-                <label> Photo </label><SingleInput name="photo" handler={this.handleComponentChange} />
-
-
-                <button type="submit" className="btn btn-primary" onClick={(e)=>this.handleSubmit(e)}>Register</button>
-        </form>
         )
     }
  }

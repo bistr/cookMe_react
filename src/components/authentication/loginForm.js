@@ -1,5 +1,9 @@
 import React from 'react'
 import UserProfile from './userProfile';
+import GenericForm from "../generic/genericForm"
+import SingleInput from "../generic/singleInput"
+import Utilities from "../generic/utilities"
+import Alert from "../generic/alert"
 
 class LoginForm extends React.Component
 {
@@ -9,70 +13,51 @@ class LoginForm extends React.Component
 
         this.state =
         {
-            success: '',
-            message: ''
+            "errors":[]
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleSubmit(event)
+    handleSubmit(formInfo)
     {
-        let username = document.getElementById("username").value;
-        let password = document.getElementById("password").value;
-        event.preventDefault()
-        fetch('https://cook-me.herokuapp.com/login', {
-          method: 'POST',// or 'PUT'
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({"username":username, "password":password}),
-        })
-        .then((response) => response.json())
+        this.setState({"errors":[]});
+        Utilities.sendRequestPost('https://cook-me.herokuapp.com/login',formInfo)
         .then((data)=>
-    {
-        if (data["status"]==="OK")
         {
-            UserProfile.setName(data["id"]);
-            //redirect to profile
-            window.open("/profile/"+UserProfile.getName());
-        }
-        else if(data["status"]==="Wrong password")
-        {
-            alert("wrong password")
-        }
-        else if(data["status"]==="User doesn't exist"){
-            alert("No such user")
-        }
-        else {
-            alert("what happened?????")
-        }
-    })
-        .then((data) => {
-          console.log(data);
+            if (data["status"]==="OK")
+            {
+                UserProfile.setName(data["id"]);
+                window.open("/profile/"+UserProfile.getName());
+            }
+            else if(data["status"]==="Wrong password")
+            {
+                this.setState({"errors": this.state.errors.concat("Wrong password.")});
+            }
+            else if(data["status"]==="User doesn't exist"){
+                this.setState({"errors": this.state.errors.concat("Username doesn't exist.")});
+            }
+            else {
+                this.setState({"errors": this.state.errors.concat("There was something wrong with your request. Try again later.")});
+            }
         })
         .catch((error) => {
-          console.error('Error:', error);
+          this.setState({"errors": this.state.errors.concat("There was something wrong with your request. Try again later.")});
         });
-
-
-
-
-        //UserProfile.setName(userId);
     }
 
 
     render()
     {
         return(
-            <form onSubmit={this.handleSubmit} className="w-75">
+            <>
+            <GenericForm handler={this.handleSubmit} required={["username", "password"]} >
+                <SingleInput name= "username" placeholder="Username"  />
+                <SingleInput name= "password" type ="password" placeholder="Password"  />
+            </GenericForm>
+            <Alert errors={this.state.errors} />
+            </>
 
-                <label htmlFor="username">Which user are you?</label>
-                <input id="username" className="form-input my-3" type="text" required placeholder="Username"  />
-                <label htmlFor="password">Password</label>
-                <input id="password" className="form-input my-3" type="password" required placeholder="Password"  />
-                <button className="btn btn-primary my-3" onClick={(e)=>this.handleSubmit(e)}>Submit</button>
-        </form>
         )
     }
  }
