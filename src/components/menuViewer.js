@@ -6,7 +6,7 @@ import MenuMaker from "./menuMaker"
 import NutritionalInfo from "./recipes/nutritionalInfo"
 
 
-class MenuDisplayer extends React.Component {
+class MenuViewer extends React.Component {
     constructor(props) {
         super(props);
         let current_user_id = UserProfile.getName();
@@ -159,4 +159,4 @@ class MenuDisplayer extends React.Component {
 
 }
 
-export default MenuDisplayer
+export default MenuViewer

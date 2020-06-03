@@ -68,14 +68,15 @@ class MenuCreator extends React.Component {
         {
             newErrors.push("Choose a name for your menu. ");
         }
-        this.setState({"errors":newErrors});
+        return newErrors;
     }
 
 
     submitHandler()
     {
-        this.validateForm();
-        if (this.state.errors.length !== 0)
+        let errors = this.validateForm();
+        this.setState({"errors":errors});
+        if (errors.length !== 0)
         {
             return;
         }

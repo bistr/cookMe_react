@@ -13,7 +13,7 @@ import ProfilePage from "./components/profilePage"
 import Navigation from "./components/navigation"
 import CollectionPage from "./components/collections/collectionPage"
 import EquipmentForm from "./components/equipment/equipmentForm"
-import MenuDisplayer from "./components/menuDisplayer"
+import MenuViewer from "./components/menuViewer"
 import MenuEditor from "./components/menuEditor"
 import MenuCreator from "./components/menuCreator"
 import Search from "./components/search"
@@ -37,7 +37,7 @@ const routing = (
         <Route path = "/collections/:id" component = {CollectionPage} />
         <Route path = "/equipment/" component = {EquipmentForm} />
         <Route path = "/menumaker/:id" component = {MenuEditor} />
-        <Route path = "/menuviewer/:id" component = {MenuDisplayer} />
+        <Route path = "/menus/:id" component = {MenuViewer} />
         <Route path = "/create-menu" component = {MenuCreator} />
 
       </Switch>

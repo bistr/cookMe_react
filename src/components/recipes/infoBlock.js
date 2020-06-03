@@ -8,24 +8,6 @@ class InfoBlock extends React.Component
     {
         super(props);
         this.state = {};
-        // <div className={classNameString}>
-        // <table className="w-100">
-        // <thead className="thead-dark w-100">
-        //     <tr>
-        //         <th>Nutritional</th>
-        //         <th>Info</th>
-        //     </tr>
-        // </thead>
-        //       <tbody className="w-100">
-        //       {this.props.info.map((nutrient) => (
-        //           <tr>
-        //             <th scope="row">{nutrient.name}</th>
-        //             <td>{nutrient.value}</td>
-        //           </tr>
-        //       ))}
-        //       </tbody>
-        //       </table>
-        // </div>
     }
 
 

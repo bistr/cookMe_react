@@ -96,7 +96,7 @@ class MenuEditor extends React.Component {
         })
         .then((response) => response.json())
         .then((data) => {
-          window.open("/menuviewer/"+data.id)
+          window.open("/menus/"+data.id)
         })
         .catch((error) => {
           console.error('Error:', error);
