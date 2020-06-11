@@ -1,68 +1,58 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### CookMe - recipe collection system ###
 
-## Available Scripts
+CookMe provides plenty of ways to collect all your favorite recipes.
+Here is what you can do.
 
-In the project directory, you can run:
+* Browse recipes
+* Search for recipes
+* View posts from everyone
 
-### `npm start`
+And for our **registered** users, there is plenty more to do, including:
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+* Upload recipes
+* Create collections of recipes
+* Create nutritionally complete menus 
+* Get system-suggested menus
+* Write posts about recipes you've tried
+* Search for meals perfect for your preferences
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+# How to use CookMe? #
 
-### `npm test`
+Visit https://cookme-93f92.firebaseapp.com/. *(keep in mind that the first time you visit, it might be a little slow to load. Try refreshing! (database processes need to start up))*
+Feel free to browse top recipes which appear on the landing page, or search some recipes from the _**Search**_ button.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# Authentication #
 
-### `npm run build`
+When you feel you want to use all of CookMe's functionality, head to the _**Register**_ page. You'll need to fill out some information about yourself, create a username and password, and you're in! Don't worry, all data you enter is transferred only over secure connections.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# Your new profie #
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+Having created your user account, you can now visit your profile page. When you use CookMe for a little while, your uploaded recipes, posts and collections will be available to see on your page. For now, you can head to the _**Update equipment**_ menu and add all kitchenware you own, for future reference.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# Uploading Recipes #
 
-### `npm run eject`
+When you log in, you will notice that a few extra buttons have suddenly appeared on the navigation bar, one of them being _**Upload recipe**_. There you can describe the ingredients, steps and go into a lot of detail on preparing your favorite recipe. Make it a good one!
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+# Writing posts #
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Having completed your first recipe, you can browse other people's ideas. When a meal catches your attention, cook it and share your experience! Clicking the _**I cooked that!**_ button on the recipe page will open up a modal form, where you can share what you liked, didn't like and would change, so others can learn from your words. Your post will be visible, along with all other relevant posts, on the bottom of the recipe page!
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+# Making collections #
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Let's say you stumbled upon a recipe which really piqued your interest. Maybe you'd like to save it for later? Just click the _**Add to collection**_ button on the recipe page and choose the collection! If you don't have quite the right collection started, you can create it from the same menu.
 
-## Learn More
+# Creating menus #
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Want to plan a full day's or week's menu? CookMe's got you covered. In the _**Create Menu**_ section, you can browse all recipes and search for just the right ones to add to your menu. When you've got them picked, choose a name for your menu and proceed to our Menu Editor. There, you can use the drag-and-drop functionality and arrange them just right! When you're done, your new menu can be found on your profile page. (*not yet though, I forgot to do it*). Or if you'd like, you can let CookMe choose your menu! With your preferences in mind, the system will pick some recipes on your behalf. All you have to do is cook!
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Thanks for reading! ##
 
-### Code Splitting
+Now it's time to head on over to CookMe!
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
 
-### Analyzing the Bundle Size
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
 
-### Making a Progressive Web App
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
 
-### Advanced Configuration
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
 
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
