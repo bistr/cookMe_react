@@ -1,4 +1,5 @@
-[Бг](#CookMe---онлайн-готварска-книга)
+[:bulgaria:](#CookMe---онлайн-готварска-книга) [:gb:](#CookMe---online-cookbook)
+
 # CookMe - online cookbook #
 
 CookMe provides plenty of ways to collect all your favorite recipes.
